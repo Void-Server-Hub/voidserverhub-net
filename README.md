@@ -1,6 +1,6 @@
 # 🌌 Void Server Hub – Official Website
 
-Welcome to the public repository for the official **Void Server Hub** website!
+Welcome to the public repository for the official **Void Server Hub** website.
 
 > **Live Site:** [voidserverhub.net](https://voidserverhub.net)
 
