@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSH Ownership Offer | VSH</title>
+    <meta name="description" content="An offer for your Minecraft server to join the Void Server Hub network under our ownership with full support and promotion.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(106, 13, 173, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05) 0%, transparent 30%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .content-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-title i {
+            font-size: 1.5rem;
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .benefit-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Structure Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .option-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            text-align: center;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .option-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .option-desc {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Policy Section */
+        .policy-box {
+            background: rgba(106, 13, 173, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: 0 10px 10px 0;
+            margin: 40px 0;
+        }
+
+        .policy-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .policy-text:before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 4rem;
+            color: rgba(255, 215, 0, 0.2);
+            font-family: serif;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Animations */
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo" class="preloader-logo">
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="https://voidserverhub.net" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">An Offer from the <span>Void</span></h1>
+                <p class="hero-subtitle">Your server. Our alliance. Let's shape the future together.</p>
+                <div class="hero-buttons">
+                    <a href="https://discord.gg/vsh" class="btn btn-accent">Begin Talks</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="particles" id="particles-js"></div>
+    </section>
+
+    <!-- What VSH Ownership Means -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title animate">What VSH Ownership Means</h2>
+            <p class="section-subtitle animate delay-1">A partnership that elevates your server while preserving what makes it unique</p>
+            
+            <div class="content-card animate delay-2">
+                <div class="card-title">
+                    <i class="fas fa-handshake"></i>
+                    <span>Mutual Growth</span>
+                </div>
+                <div class="card-content">
+                    <p>When your server joins the Void Server Hub network under our ownership, we create a symbiotic relationship that benefits both communities:</p>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>VSH Owned Server</h4>
+                                <p>Your server becomes an official part of the Void Network, gaining our full support and infrastructure.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Retain Your Identity</h4>
+                                <p>Keep your existing staff, branding, and community culture while benefiting from our network.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Full Support</h4>
+                                <p>We provide backend assistance, moderation help, and promotional support to grow your player base.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section" style="background: var(--bg-darker);">
+        <div class="container">
+            <h2 class="section-title animate">Benefits of Joining</h2>
+            <p class="section-subtitle animate delay-1">Discover how the Void Network can amplify your server's potential</p>
+            
+            <div class="content-card animate delay-2">
+                <div class="card-title">
+                    <i class="fas fa-rocket"></i>
+                    <span>Network Advantages</span>
+                </div>
+                <div class="card-content">
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Central Hub Promotion</h4>
+                                <p>Get featured on our main hub with thousands of daily visitors discovering your server.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Cross-Server Events</h4>
+                                <p>Participate in network-wide events that bring communities together for special gameplay.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Design & Lore Support</h4>
+                                <p>Access our creative team for custom designs and integrate with the Void universe storyline.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="benefit-text">
+                                <h4>Unit-I Collaboration</h4>
+                                <p>Optional strategic partnership with Unit-I for advanced technical and community support.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flexible Structures -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title animate">Flexible Structures</h2>
+            <p class="section-subtitle animate delay-1">Choose the integration model that works best for your community</p>
+            
+            <div class="options-grid">
+                <div class="option-card animate">
+                    <div class="option-icon">
+                        <i class="fas fa-chess-king"></i>
+                    </div>
+                    <h3 class="option-title">Full Ownership</h3>
+                    <p class="option-desc">We handle all backend operations and infrastructure while you lead the community with your existing staff.</p>
+                    <a href="https://discord.gg/vsh" class="btn btn-outline">Learn More</a>
+                </div>
+                
+                <div class="option-card animate delay-1">
+                    <div class="option-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="option-title">Semi-Autonomous</h3>
+                    <p class="option-desc">Maintain full control while receiving our advice, promotional support, and optional resources.</p>
+                    <a href="https://discord.gg/vsh" class="btn btn-outline">Learn More</a>
+                </div>
+                
+                <div class="option-card animate delay-2">
+                    <div class="option-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="option-title">Lore Integration</h3>
+                    <p class="option-desc">Connect your server to the Void universe with a custom storyline while keeping operational independence.</p>
+                    <a href="https://discord.gg/vsh" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Regulation -->
+    <section class="section" style="background: var(--bg-darker);">
+        <div class="container">
+            <h2 class="section-title animate">Network Regulation</h2>
+            <p class="section-subtitle animate delay-1">Effective November 19, 2024</p>
+            
+            <div class="content-card animate delay-2">
+                <div class="card-title">
+                    <i class="fas fa-gavel"></i>
+                    <span>Exclusive Server Integration Authority</span>
+                </div>
+                <div class="card-content">
+                    <div class="policy-box">
+                        <p class="policy-text">
+                            Only the VSH Owner, XxVoidicxX, has the exclusive authority to bring other servers into the VSH Network.
+                            Integrated servers will regulate themselves through their own staff and owner.
+                            VSH staff cannot moderate or control subservers directly.
+                            Subservers must adhere to VSH regulations to maintain consistency across the network.
+                            This ensures autonomy, while preserving the integrity and structure of the Void Network.
+                        </p>
+                    </div>
+                    <p>This policy creates a balanced ecosystem where each server maintains its identity while benefiting from network resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title animate">Ready to Join the Void?</h2>
+                <p class="cta-subtitle animate delay-1">To discuss integration and ownership, contact XxVoidicxX on Discord directly or visit our Discord server.</p>
+                <div class="hero-buttons animate delay-2">
+                    <a href="https://discord.gg/vsh" class="btn btn-accent">
+                        <i class="fab fa-discord"></i> Join Our Discord
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            const progress = document.querySelector('.preloader-progress');
+            
+            // Simulate loading progress
+            let width = 0;
+            const interval = setInterval(function() {
+                width += 5;
+                progress.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        preloader.classList.add('fade-out');
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            }, 50);
+            
+            // Initialize animations
+            initAnimations();
+            
+            // Initialize particles
+            if (document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#9c4dff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#6a0dad",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": false
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Animation on scroll
+        function initAnimations() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+    </script>
+</body>
+</html>

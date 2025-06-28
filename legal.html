@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal | Void Server Hub</title>
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-darker);
+            border-radius: 10px;
+            padding: 15px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            color: var(--accent);
+            background: rgba(106, 13, 173, 0.1);
+            padding-left: 25px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            background: var(--bg-darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .legal-content:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(106,13,173,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .legal-section {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .legal-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .legal-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .legal-section h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .legal-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .legal-section h3 {
+            color: var(--text);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .legal-section ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .legal-section li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .legal-section li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Table of Contents */
+        .toc {
+            position: sticky;
+            top: 100px;
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .toc h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .toc a:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+            padding-left: 25px;
+        }
+
+        .toc a:hover:before {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg-darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                box-shadow: none;
+                padding: 10px 0 0 20px;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .toc {
+                position: static;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo" class="preloader-logo">
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void <span>Server</span> Hub
+            </a>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#servers">Servers <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Void Skygen</a>
+                            <a href="#">Skull Anarchy</a>
+                            <a href="#">Spacial Prisons</a>
+                            <a href="#">Culturehub Anarchy</a>
+                            <a href="#">Void SMP</a>
+                        </div>
+                    </li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#allies">Allies</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Legal <span>Documents</span></h1>
+                <p class="hero-subtitle">Terms of Service, Privacy Policy, and other important legal information</p>
+            </div>
+        </div>
+        
+        <div class="particles" id="particles-js"></div>
+    </section>
+
+    <!-- Legal Content Section -->
+    <section class="section legal-content">
+        <div class="container">
+            <h2 class="section-title animate">Legal Information</h2>
+            <p class="section-subtitle animate delay-1">Official policies and terms governing Void Server Hub</p>
+            
+            <div class="toc animate delay-1">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#tos">Terms of Service</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#dmca">DMCA Statement</a></li>
+                    <li><a href="#disclaimers">Disclaimers</a></li>
+                    <li><a href="#credits">Credits & Usage Notes</a></li>
+                </ul>
+            </div>
+            
+            <!-- Terms of Service -->
+            <div class="legal-section animate" id="tos">
+                <h2>Terms of Service</h2>
+                <p>By accessing or using Void Server Hub (VSH) services, you agree to comply with these Terms of Service.</p>
+                
+                <h3>Community Rules</h3>
+                <ul>
+                    <li>Users must follow all community rules of Void Server Hub and its affiliated Minecraft Bedrock servers.</li>
+                    <li>Abuse, harassment, impersonation, or malicious activity may result in permanent bans from our services.</li>
+                    <li>Participation in VSH implies agreement to follow staff directions and network policies.</li>
+                </ul>
+                
+                <h3>User Conduct</h3>
+                <ul>
+                    <li>Do not exploit bugs or use unauthorized modifications that provide unfair advantages.</li>
+                    <li>Respect all players and staff members - toxicity and hate speech are not tolerated.</li>
+                    <li>Account sharing is prohibited and may result in suspension of all associated accounts.</li>
+                </ul>
+                
+                <h3>Service Limitations</h3>
+                <ul>
+                    <li>Access to premium or custom features may be limited based on availability and user standing.</li>
+                    <li>Terms may change without prior notice - continued use constitutes acceptance of revised terms.</li>
+                    <li>We reserve the right to terminate services for any user at our discretion.</li>
+                </ul>
+            </div>
+            
+            <!-- Privacy Policy -->
+            <div class="legal-section animate delay-1" id="privacy">
+                <h2>Privacy Policy</h2>
+                <p>Void Server Hub is committed to protecting your privacy and personal information.</p>
+                
+                <h3>Information Collection</h3>
+                <ul>
+                    <li>VSH <strong>does not sell, share, or publicly expose private user information</strong>.</li>
+                    <li>We may collect general site analytics (e.g., visit count), but do not use cookies or trackers beyond basic performance tools.</li>
+                    <li>For moderation purposes, we may log in-game and Discord usernames, IP addresses, and chat history.</li>
+                </ul>
+                
+                <h3>Reporting System</h3>
+                <ul>
+                    <li>If you file a report, <strong>you will remain anonymous</strong> to the public and most staff.</li>
+                    <li>Reports are only visible to trusted administrative roles necessary for investigation.</li>
+                    <li>Staff are prohibited from disclosing reporter identities under penalty of disciplinary action.</li>
+                </ul>
+                
+                <h3>Data Retention</h3>
+                <ul>
+                    <li>Logs and moderation records are kept internally for security and compliance purposes.</li>
+                    <li>You may request deletion of personal data by contacting network administration.</li>
+                    <li>Some data may be retained if required for ongoing investigations or legal compliance.</li>
+                </ul>
+            </div>
+            
+            <!-- DMCA Statement -->
+            <div class="legal-section animate delay-2" id="dmca">
+                <h2>DMCA Statement</h2>
+                <p>Void Server Hub respects intellectual property rights and will respond to valid DMCA requests.</p>
+                
+                <h3>Copyright Claims</h3>
+                <ul>
+                    <li>If you believe your content has been used improperly, contact the owner of VSH (Voidic / XxVoidicxX) via Discord.</li>
+                    <li>We will respond promptly and take necessary action to investigate and resolve the issue.</li>
+                    <li>Please provide detailed information including the copyrighted work, its location on our services, and your contact information.</li>
+                </ul>
+                
+                <h3>Content Ownership</h3>
+                <ul>
+                    <li>Most content is created by VSH manually or through AI tools that grant commercial usage and ownership.</li>
+                    <li>User-generated content remains the property of its creators, who grant VSH a license to display it.</li>
+                    <li>If you believe your content was used without proper attribution or permission, please contact us immediately.</li>
+                </ul>
+            </div>
+            
+            <!-- Disclaimers -->
+            <div class="legal-section animate delay-3" id="disclaimers">
+                <h2>Disclaimers</h2>
+                <p>Important legal notices regarding Void Server Hub services.</p>
+                
+                <h3>Affiliation</h3>
+                <ul>
+                    <li>VSH is <strong>not affiliated with Mojang, Microsoft, or any other Minecraft IP holder</strong>.</li>
+                    <li>Minecraft is a registered trademark of Mojang Studios - all rights reserved.</li>
+                </ul>
+                
+                <h3>Network Status</h3>
+                <ul>
+                    <li>Void Server Hub is a <strong>community network</strong>, not a legal entity or company.</li>
+                    <li>All references to "Void Server Hub," "CosmicAI," and other internal tools or servers refer to community-run projects.</li>
+                </ul>
+                
+                <h3>Branding Rights</h3>
+                <ul>
+                    <li>While we are not a registered LLC, we claim name usage rights over our branding.</li>
+                    <li>Unauthorized use of VSH branding, logos, or trademarks is prohibited.</li>
+                </ul>
+                
+                <h3>Service Availability</h3>
+                <ul>
+                    <li>We provide services "as is" without warranties of any kind.</li>
+                    <li>Server uptime is not guaranteed and may be affected by factors beyond our control.</li>
+                </ul>
+            </div>
+            
+            <!-- Credits & Usage Notes -->
+            <div class="legal-section animate" id="credits">
+                <h2>Credits & Usage Notes</h2>
+                <p>Attribution and permissions for content used by Void Server Hub.</p>
+                
+                <h3>Content Ownership</h3>
+                <ul>
+                    <li>Any assets created via AI tools (like Suno or image generation tools) are either owned by us or licensed to us.</li>
+                    <li>Manual designs, logos, and text are custom-created for Void Server Hub and not to be reused without permission.</li>
+                </ul>
+                
+                <h3>Third-Party Content</h3>
+                <ul>
+                    <li>This site may showcase or embed other platforms for display or promotion purposes, always with credit or fair use in mind.</li>
+                    <li>Where applicable, third-party content is used with permission or under appropriate licenses.</li>
+                </ul>
+                
+                <h3>Attribution</h3>
+                <ul>
+                    <li>Website design and development by Void Server Hub team.</li>
+                    <li>Special thanks to our community members and allies for their contributions.</li>
+                </ul>
+                
+                <h3>Permissions</h3>
+                <ul>
+                    <li>For inquiries about using our content, please contact network administration.</li>
+                    <li>Educational or non-commercial use may be granted on a case-by-case basis.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                        Void <span>Server</span> Hub
+                    </div>
+                    <p>A Network of Minecraft dedicated servers! Started June 11, 2021</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/vsh"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.pinterest.com/VoidServerHub/"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.youtube.com/@VoidServerHub"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/VoidServerHub"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#servers">Servers</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#allies">Allies</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="mailto:voidserverhub@gmail.com">Contact</a></li>
+                        <li><a href="resources.html">Resource Page</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal.html">Regulations</a></li>
+                        <li><a href="legal.html#tos">Terms of Service</a></li>
+                        <li><a href="legal.html#privacy">Privacy Policy</a></li>
+                        <li><a href="legal.html#dmca">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome Icons (embedded) -->
+    <script>
+        // Font Awesome SVG for icons used
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create style element for Font Awesome
+            const faStyle = document.createElement('style');
+            faStyle.textContent = `
+                .fas, .fab {
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    display: inline-block;
+                    font-style: normal;
+                    font-variant: normal;
+                    text-rendering: auto;
+                    line-height: 1;
+                }
+                
+                .fa-bars:before {
+                    content: "\\f0c9";
+                }
+                
+                .fa-times:before {
+                    content: "\\f00d";
+                }
+                
+                .fa-chevron-down:before {
+                    content: "\\f078";
+                }
+                
+                .fa-discord:before {
+                    content: "\\f392";
+                }
+                
+                .fa-pinterest:before {
+                    content: "\\f0d2";
+                }
+                
+                .fa-youtube:before {
+                    content: "\\f167";
+                }
+                
+                .fa-instagram:before {
+                    content: "\\f16d";
+                }
+            `;
+            document.head.appendChild(faStyle);
+            
+            // Preloader
+            const preloader = document.querySelector('.preloader');
+            const progress = document.querySelector('.preloader-progress');
+            
+            // Simulate loading progress
+            let width = 0;
+            const interval = setInterval(function() {
+                width += 5;
+                progress.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        preloader.classList.add('fade-out');
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            }, 50);
+            
+            // Initialize animations
+            initAnimations();
+            
+            // Initialize particles
+            if (document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#9c4dff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#6a0dad",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": false
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        });
+        
+        // Mobile menu toggle
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                // Close mobile menu when clicking a link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    });
+                });
+            }
+        }
+        
+        // Header scroll effect
+        function setupHeaderScroll() {
+            const header = document.getElementById('header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+        }
+        
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Animation on scroll
+        function initAnimations() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+        
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+            setupHeaderScroll();
+            setupSmoothScrolling();
+            initAnimations();
+        });
+        
+        // Particles.js (embedded)
+        function particlesJS(tag_id, params) {
+            // Simplified particles.js implementation
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.zIndex = '-1';
+            document.getElementById(tag_id).appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = document.getElementById(tag_id).offsetWidth;
+            canvas.height = document.getElementById(tag_id).offsetHeight;
+            
+            // Create particles
+            const particles = [];
+            const particleCount = params.particles.number.value;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * params.particles.size.value + 1,
+                    speedX: (Math.random() - 0.5) * params.particles.move.speed,
+                    speedY: (Math.random() - 0.5) * params.particles.move.speed
+                });
+            }
+            
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Update and draw particles
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    
+                    // Update position
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    // Bounce off edges
+                    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                    
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = params.particles.color.value;
+                    ctx.globalAlpha = params.particles.opacity.value;
+                    ctx.fill();
+                    
+                    // Draw connections
+                    if (params.particles.line_linked.enable) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const p2 = particles[j];
+                            const dx = p.x - p2.x;
+                            const dy = p.y - p2.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < params.particles.line_linked.distance) {
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.strokeStyle = params.particles.line_linked.color;
+                                ctx.lineWidth = params.particles.line_linked.width;
+                                ctx.globalAlpha = params.particles.line_linked.opacity * (1 - distance / params.particles.line_linked.distance);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', function() {
+                canvas.width = document.getElementById(tag_id).offsetWidth;
+                canvas.height = document.getElementById(tag_id).offsetHeight;
+            });
+        }
+    </script>
+</body>
+</html>

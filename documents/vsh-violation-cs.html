@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violation Classification System | VSH</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Void Server Hub - Violation Classification System">
+    <meta name="description" content="Official violation classification system for Void Server Hub networks">
+    
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/vsh-violation-cs.html">
+    <meta property="og:title" content="Void Server Hub - Violation Classification System">
+    <meta property="og:description" content="Official violation classification system for Void Server Hub networks">
+    <meta property="og:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/vsh-violation-cs.html">
+    <meta name="twitter:title" content="Void Server Hub - Violation Classification System">
+    <meta name="twitter:description" content="Official violation classification system for Void Server Hub networks">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --warning: #f44336;
+            --warning-dark: #d32f2f;
+            --warning-light: #ff6659;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Document Header */
+        .document-header {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .document-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .document-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .document-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+        }
+
+        .document-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .document-meta-item i {
+            color: var(--accent);
+        }
+
+        /* Document Content */
+        .document-content {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .document-section {
+            margin-bottom: 60px;
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .document-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .document-section h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--text);
+            border-bottom: 2px solid rgba(106, 13, 173, 0.5);
+            padding-bottom: 8px;
+        }
+
+        .document-section p, .document-section ul {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .document-section ul {
+            padding-left: 20px;
+        }
+
+        .document-section li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .document-section li:before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* Violation Levels */
+        .violation-level {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .violation-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+            color: white;
+        }
+
+        .violation-header i {
+            font-size: 1.5rem;
+        }
+
+        .violation-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .violation-content {
+            padding: 25px;
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 3px solid var(--warning);
+        }
+
+        .violation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .violation-item {
+            margin-bottom: 15px;
+        }
+
+        .violation-item h4 {
+            color: var(--warning-light);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* Staff Multiplier Section */
+        .staff-multiplier {
+            background: rgba(106, 13, 173, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 5px solid var(--accent);
+        }
+
+        .staff-multiplier h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 3px solid var(--accent);
+        }
+
+        .example-box h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .document-header {
+                padding: 150px 0 80px;
+            }
+            
+            .document-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .document-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .violation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .document-header {
+                padding: 120px 0 60px;
+            }
+            
+            .document-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .document-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="https://voidserverhub.net/index.html" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+        </div>
+    </header>
+
+    <!-- Document Header -->
+    <section class="document-header">
+        <div class="container">
+            <h1>⚖️ Void Server Hub: Violation Classification System</h1>
+            <p>This document defines how violations are classified and handled across Void Server Hub and its networks (including Discord, Minecraft Realms, and affiliated platforms).</p>
+            
+            <div class="document-meta">
+                <div class="document-meta-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>VOID SERVER HUB: VIOLATION TIER TERMS OF SERVICE (TOS)</span>
+                </div>
+                <div class="document-meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Last updated: May 24, 2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Content -->
+    <section class="document-content">
+        <div class="container">
+            <div class="document-section">
+                <h2><i class="fas fa-balance-scale"></i> Guilt Principles</h2>
+                <ul>
+                    <li>If someone is accused by others, they are treated as innocent until proven guilty.</li>
+                    <li>If someone admits or jokes about serious offenses, they are treated as guilty until proven innocent, even if unverifiable.</li>
+                </ul>
+            </div>
+            
+            <div class="document-section">
+                <h2><i class="fas fa-clock"></i> Violation Timeout Policy</h2>
+                <p>Old violations may be ignored if enough time has passed without repeated offenses. This does not remove them from logs, but staff may treat them as resolved.</p>
+                <ul>
+                    <li><strong>Level 1:</strong> Ignored after 30 days</li>
+                    <li><strong>Level 2:</strong> Ignored after 60 days</li>
+                    <li><strong>Level 3:</strong> Ignored after 90 days (unless staff-related)</li>
+                    <li><strong>Level 4-5:</strong> Never ignored</li>
+                </ul>
+            </div>
+            
+            <!-- Level 1 -->
+            <div class="violation-level">
+                <div class="violation-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>⚠️ LEVEL 1: Minor Disruption / Offensive Behavior</h3>
+                </div>
+                <div class="violation-content">
+                    <div class="violation-grid">
+                        <div class="violation-item">
+                            <h4>Definition</h4>
+                            <p>Low-impact or inappropriate behavior that doesn't cause serious harm.</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Examples</h4>
+                            <p>Slurs, suggestive jokes, toxicity, spam, impersonation, inappropriate profiles</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Actions</h4>
+                            <p>Warning, mute, content removal, short ban</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Notes</h4>
+                            <p>Repeated offenses may escalate to Level 2.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 2 -->
+            <div class="violation-level">
+                <div class="violation-header">
+                    <i class="fas fa-ban"></i>
+                    <h3>🚫 LEVEL 2: General Rule Violations</h3>
+                </div>
+                <div class="violation-content">
+                    <div class="violation-grid">
+                        <div class="violation-item">
+                            <h4>Definition</h4>
+                            <p>Rule-breaking that disrupts gameplay or platform safety.</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Examples</h4>
+                            <p>Hacking, glitch abuse, griefing, alt evasion, trolling, harmful links</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Actions</h4>
+                            <p>Warning, temporary ban, log entry</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Notes</h4>
+                            <p>Repeat offenses may be escalated to Level 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 3 -->
+            <div class="violation-level">
+                <div class="violation-header">
+                    <i class="fas fa-bell"></i>
+                    <h3>🚨 LEVEL 3: Internal Threats / Staff Misuse</h3>
+                </div>
+                <div class="violation-content">
+                    <div class="violation-grid">
+                        <div class="violation-item">
+                            <h4>Definition</h4>
+                            <p>Abuse of trust, coordination of harm, or major disruptions</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Examples</h4>
+                            <p>Staff revenge, raid support, bot attacks, unauthorized access</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Actions</h4>
+                            <p>Demotion, ban, internal investigation, blacklist</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Notes</h4>
+                            <p>Always logged. Managed by Senior Admin or higher.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 4 -->
+            <div class="violation-level">
+                <div class="violation-header">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>💸 LEVEL 4: Financial or System Integrity Abuse</h3>
+                </div>
+                <div class="violation-content">
+                    <div class="violation-grid">
+                        <div class="violation-item">
+                            <h4>Definition</h4>
+                            <p>Financial harm or manipulation of critical systems</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Examples</h4>
+                            <p>Faking donations, scams, selling roles, payment access attempts</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Actions</h4>
+                            <p>Permanent ban, community alert, admin review</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Notes</h4>
+                            <p>Evidence must be preserved. Zero tolerance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Level 5 -->
+            <div class="violation-level">
+                <div class="violation-header">
+                    <i class="fas fa-skull"></i>
+                    <h3>☠️ LEVEL 5: Network-Wide or Ownership Attacks</h3>
+                </div>
+                <div class="violation-content">
+                    <div class="violation-grid">
+                        <div class="violation-item">
+                            <h4>Definition</h4>
+                            <p>Any attack that could compromise the network, ownership, or core systems</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Examples</h4>
+                            <p>Owner hacks, database leaks, DDoS, world deletions, hijack attempts</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Actions</h4>
+                            <p>Full lockdown, emergency alerts, permanent bans, provider reports</p>
+                        </div>
+                        <div class="violation-item">
+                            <h4>Notes</h4>
+                            <p>Maximum severity. Only handled by Head Management.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Staff Multiplier -->
+            <div class="staff-multiplier">
+                <h2><i class="fas fa-user-shield"></i> STAFF VIOLATION MULTIPLIER</h2>
+                <p>If a staff member breaks a rule, it is counted one level higher than normal.</p>
+                <p>This applies to all staff roles from Trial Mod to Head Admin.</p>
+                <p>Staff violations cannot escalate above Level 5.</p>
+                
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <ul>
+                        <li>A member using slurs = Level 1 → Staff = Level 2</li>
+                        <li>A member bypassing a ban = Level 2 → Staff = Level 3</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Legal Notice -->
+            <div class="document-section">
+                <h2><i class="fas fa-gavel"></i> LEGAL & USE NOTICE</h2>
+                <p>You may use or adapt this system for your own server or project with credit to Void Server Hub.</p>
+                <p>Only Levels 1–5 are defined. Anything beyond Level 5 is not covered.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="https://voidserverhub.net/index.html" class="footer-logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

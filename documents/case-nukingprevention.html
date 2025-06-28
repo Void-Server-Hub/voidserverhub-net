@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuking Prevention | VSH</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Nuking Prevention | Void Server Hub">
+    <meta name="description" content="Learn about nuking attacks in Minecraft and how Void Server Hub protects its community.">
+    
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/nuking.html">
+    <meta property="og:title" content="Nuking Prevention | Void Server Hub">
+    <meta property="og:description" content="Learn about nuking attacks in Minecraft and how Void Server Hub protects its community.">
+    <meta property="og:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/nuking.html">
+    <meta name="twitter:title" content="Nuking Prevention | Void Server Hub">
+    <meta name="twitter:description" content="Learn about nuking attacks in Minecraft and how Void Server Hub protects its community.">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/vsh_purple.webp">
+    
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --danger: #f44336;
+            --danger-dark: #d32f2f;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Same as index.html */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--danger);
+            text-shadow: 0 2px 10px rgba(244, 67, 54, 0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .content-section.dark {
+            background-color: var(--bg-darker);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--danger);
+            border-radius: 2px;
+        }
+
+        .section-title.accent:after {
+            background: var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--danger);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card.accent {
+            border-left-color: var(--accent);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--danger);
+        }
+
+        .info-card.accent h3 {
+            color: var(--accent);
+        }
+
+        .info-card ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-card li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .info-card li strong {
+            color: var(--text);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Evidence Layout */
+        .evidence-container {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+
+        .evidence-screenshot {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--danger);
+        }
+
+        .evidence-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .evidence-content {
+            flex: 2;
+        }
+
+        /* Case Studies */
+        .case-study {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--danger);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .case-study h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--danger);
+        }
+
+        .case-study .tag {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: var(--bg-darker);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .evidence-container {
+                flex-direction: column;
+            }
+            
+            .evidence-screenshot {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg-darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#servers">Servers</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#allies">Allies</a></li>
+                    <li><a href="nuking.html">Nuking Info</a></li>
+                    <li><a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nuking Prevention</h1>
+            <p>Understanding and combating malicious attacks on Minecraft servers and Realms</p>
+        </div>
+    </section>
+
+    <!-- What is a Nuker? -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">What is a Nuker?</h2>
+            <p class="section-subtitle">A Nuker is typically a user or bot that leverages automated tools or exploits to intentionally shut down, crash, or heavily lag a Minecraft server or Realm.</p>
+            
+            <div class="info-card">
+                <p>These actions are usually targeted and malicious, aiming to disrupt gameplay, damage infrastructure, or sabotage communities. Nuking attacks can range from simple annoyance to complete server destruction, depending on the methods used and the vulnerabilities exploited.</p>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/nuking_example.webp" loading="lazy" alt="Example of nuking damage">
+                </div>
+                <div class="evidence-content">
+                    <h3>Characteristics of Nuking Attacks</h3>
+                    <ul>
+                        <li><strong>Intentional:</strong> Always performed with malicious intent</li>
+                        <li><strong>Disruptive:</strong> Causes server instability or crashes</li>
+                        <li><strong>Coordinated:</strong> Often involves multiple attackers</li>
+                        <li><strong>Repeatable:</strong> Methods can be used repeatedly until patched</li>
+                        <li><strong>Evolving:</strong> Attack methods constantly change as defenses improve</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Nuking Methods -->
+    <section class="content-section dark">
+        <div class="container">
+            <h2 class="section-title">Common Nuking Methods</h2>
+            <p class="section-subtitle">Attackers use various techniques to overwhelm or exploit Minecraft servers</p>
+            
+            <div class="info-card">
+                <h3>Spawn Flooding</h3>
+                <p>Spawning massive amounts of entities (mobs, items, etc.) to overload the server. This can cause severe lag and eventually crash the server when entity limits are exceeded.</p>
+                <ul>
+                    <li>Item frame spam</li>
+                    <li>Mass mob spawning</li>
+                    <li>Excessive item drops</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>Chunk Overload</h3>
+                <p>Forcing the server to load or generate massive numbers of chunks at once. This exploits the server's world generation and loading systems.</p>
+                <ul>
+                    <li>Flying machines generating new terrain</li>
+                    <li>Portal spamming to load Nether chunks</li>
+                    <li>World downloaders forcing chunk loads</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-content">
+                    <h3>Packet Spamming</h3>
+                    <p>Sending large volumes of requests/data packets to stress the server's performance. This low-level attack targets the server's network capacity rather than game mechanics.</p>
+                    <ul>
+                        <li>Fake player connections</li>
+                        <li>Malformed packet floods</li>
+                        <li>Bot networks simulating players</li>
+                    </ul>
+                </div>
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/packet_spam.webp" loading="lazy" alt="Packet spam example">
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h3>Crash Exploits</h3>
+                <p>Using specific game or protocol exploits to crash clients or the server itself. These often target unpatched vulnerabilities in Minecraft's code.</p>
+                <ul>
+                    <li>Book ban exploits</li>
+                    <li>Inventory crash methods</li>
+                    <li>Protocol version exploits</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Nukers Use -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Tools Nukers Commonly Use</h2>
+            <p class="section-subtitle">Understanding the tools helps in developing effective countermeasures</p>
+            
+            <div class="info-card">
+                <h3>Modified Minecraft Clients</h3>
+                <p>Clients like Horion or Inertia for Bedrock that include built-in nuking capabilities alongside other cheats.</p>
+                <ul>
+                    <li>Automated entity spawning</li>
+                    <li>Mass command execution</li>
+                    <li>Exploit activation buttons</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>Scripting Bots</h3>
+                <p>Automated scripts that perform nuking actions without direct player control.</p>
+                <ul>
+                    <li>JavaScript bots for Realms</li>
+                    <li>Python automation scripts</li>
+                    <li>Macro tools with recording</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/nuker_tools.webp" loading="lazy" alt="Nuking tools example">
+                </div>
+                <div class="evidence-content">
+                    <h3>Command Block Abuse</h3>
+                    <p>When permissions are weak, command blocks or data packs can be weaponized for nuking.</p>
+                    <ul>
+                        <li>Infinite command block loops</li>
+                        <li>Recursive function calls</li>
+                        <li>Chain reaction mechanisms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why It's a Problem -->
+    <section class="content-section dark">
+        <div class="container">
+            <h2 class="section-title">Why Nuking Is a Serious Problem</h2>
+            <p class="section-subtitle">The impacts go beyond temporary inconvenience</p>
+            
+            <div class="info-card">
+                <h3>Community Impact</h3>
+                <ul>
+                    <li><strong>Disrupts fair gameplay:</strong> Makes the server unplayable for legitimate users</li>
+                    <li><strong>Causes data loss:</strong> May force rollbacks or corrupt world files</li>
+                    <li><strong>Damages reputation:</strong> Frequent attacks drive players away</li>
+                    <li><strong>Wastes staff time:</strong> Requires constant monitoring and cleanup</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-content">
+                    <h3>Technical Consequences</h3>
+                    <ul>
+                        <li>Server hardware strain leading to crashes</li>
+                        <li>Increased hosting costs from resource spikes</li>
+                        <li>Potential service suspension from host providers</li>
+                        <li>Security vulnerabilities exposed to other attacks</li>
+                    </ul>
+                </div>
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/nuking_damage.webp" loading="lazy" alt="Nuking damage example">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Stance -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Our Stance on Nuking</h2>
+            <p class="section-subtitle">Void Server Hub's zero-tolerance policy</p>
+            
+            <div class="info-card accent">
+                <h3>Zero-Tolerance Offense</h3>
+                <p>Nuking is considered one of the most severe violations in our community. Any individual caught attempting to perform or assist in a nuking attack will face immediate and permanent consequences.</p>
+                
+                <h4 style="margin-top: 20px; color: var(--accent);">Enforcement Actions:</h4>
+                <ul>
+                    <li>Permanent ban across our entire network</li>
+                    <li>Reporting to affiliated platforms and databases</li>
+                    <li>Possible legal action for severe cases</li>
+                    <li>Public warning in community channels when appropriate</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection -->
+    <section class="content-section dark">
+        <div class="container">
+            <h2 class="section-title">How to Detect a Nuker</h2>
+            <p class="section-subtitle">Proactive monitoring is key to prevention</p>
+            
+            <div class="info-card">
+                <h3>Technical Indicators</h3>
+                <ul>
+                    <li><strong>Sudden lag spikes:</strong> Especially with no visible cause in-game</li>
+                    <li><strong>Entity count explosions:</strong> Check with /entity or similar commands</li>
+                    <li><strong>Unusual console errors:</strong> Packet floods or chunk errors</li>
+                    <li><strong>Player join/leave spam:</strong> From bot networks</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>Behavioral Signs</h3>
+                <ul>
+                    <li>Players testing commands in rapid succession</li>
+                    <li>Suspicious movement patterns (teleporting, flying)</li>
+                    <li>Attempts to access restricted commands or areas</li>
+                    <li>Sudden influx of new players with similar names</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/detection_tools.webp" loading="lazy" alt="Detection tools example">
+                </div>
+                <div class="evidence-content">
+                    <h3>Monitoring Tools</h3>
+                    <ul>
+                        <li><strong>Log analysis:</strong> Check for packet spam or chunk load spikes</li>
+                        <li><strong>Public databases:</strong> Cross-reference with RH, ARAS, or VSH Database</li>
+                        <li><strong>Automated alerts:</strong> Set up notifications for suspicious activity</li>
+                        <li><strong>Player reports:</strong> Encourage community vigilance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VSH Handling -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">How VSH Handles Nuking</h2>
+            <p class="section-subtitle">Our comprehensive approach to prevention and response</p>
+            
+            <div class="info-card">
+                <h3>Violation Classification System</h3>
+                <p>We use a Level 1 to 5 rating system based on intent and damage. Nuking fits squarely at Level 5 - the most severe category reserved for actions meant to intentionally destroy or destabilize a server.</p>
+                
+                <h4 style="margin-top: 20px; color: var(--danger);">Level 5 Violation Consequences:</h4>
+                <ul>
+                    <li>Immediate and permanent ban from all VSH services</li>
+                    <li>Detailed logging of their actions and methods</li>
+                    <li>Submission to shared threat databases</li>
+                    <li>Possible IP-based blocking for repeat offenders</li>
+                </ul>
+            </div>
+            
+            <div class="evidence-container">
+                <div class="evidence-content">
+                    <h3>Preventive Measures</h3>
+                    <ul>
+                        <li><strong>Rate limiting:</strong> Restrict command/action frequency</li>
+                        <li><strong>Entity caps:</strong> Limit spawns per player/area</li>
+                        <li><strong>Chunk loading restrictions:</strong> Prevent world overload</li>
+                        <li><strong>Whitelisting:</strong> For sensitive servers</li>
+                        <li><strong>Regular audits:</strong> Check for vulnerabilities</li>
+                    </ul>
+                </div>
+                <div class="evidence-screenshot">
+                    <img src="https://voidserverhub.net/images/vsh_protection.webp" loading="lazy" alt="VSH protection systems">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study – Echo Nuking</title>
+    <style>
+        .tag {
+            background-color: #bb00ff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .evidence-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .evidence-screenshot img {
+            max-width: 100%;
+            height: auto;
+            cursor: zoom-in;
+            border-radius: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            border: 5px solid red;
+            border-radius: 10px;
+        }
+
+        .modal-content:hover {
+            cursor: zoom-out;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 45px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- Case Studies -->
+    <section class="content-section dark">
+        <div class="container">
+            <h2 class="section-title accent">Examples of Past Nuker Cases</h2>
+            <p class="section-subtitle">Historical context helps understand the threat landscape</p>
+            
+            <div class="case-study">
+                <span class="tag">Case Study</span>
+                <h3>Echo</h3>
+                <p>Echo is known for being both a popular Minecraft server and the creator of a widely-used bot service. However, it's been widely reported that Echo's tools contain intentional backdoors and nuking capabilities accessible by its management team. Despite its utility, using Echo's services carries major risks, especially for servers lacking proper bot permission restrictions.</p>
+                
+                <div class="evidence-container">
+                    <div class="evidence-screenshot">
+                        <img id="echoImg" src="https://voidserverhub.net/images/nuking/echo_nuking.webp" loading="lazy" alt="Echo case evidence">
+                    </div>
+                    <div class="evidence-content">
+                        <h4>Key Characteristics:</h4>
+                        <ul>
+                            <li>Dual-purpose tools (utility and attack)</li>
+                            <li>Backdoor access for administrators</li>
+                            <li>Widespread adoption increases risk</li>
+                            <li>Difficult to detect until activated</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study">
+                <span class="tag">Case Study</span>
+                <h3>TSL</h3>
+                <p>While the exact meaning of "TSL" remains unclear, this group has earned a reputation as the most notorious public nuking group. They've been involved in numerous high-profile attacks on both Minecraft Realms and Discord servers, often showcasing their actions for attention. TSL operates with a high degree of visibility and aggression, making them a major threat.</p>
+                
+                <div class="evidence-container">
+                    <div class="evidence-content">
+                        <h4>Key Characteristics:</h4>
+                        <ul>
+                            <li>Highly visible and attention-seeking</li>
+                            <li>Coordinated group attacks</li>
+                            <li>Multiple attack vectors (in-game and Discord)</li>
+                            <li>Frequent name changes to avoid detection</li>
+                        </ul>
+                    </div>
+                    <div class="evidence-screenshot">
+                        <img src="https://voidserverhub.net/images/tsl_case.webp" loading="lazy" alt="TSL case evidence">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study">
+                <span class="tag">Case Study</span>
+                <h3>Oppenheimer</h3>
+                <p>Named after the father of the atomic bomb, Oppenheimer is one of the oldest and most recognized nuking groups in the Minecraft community. While believed to be inactive in organized form, its former members still pose a risk. They are known for being methodical and extremely destructive, often leaving little trace beyond server ruin.</p>
+                
+                <div class="evidence-container">
+                    <div class="evidence-screenshot">
+                        <img src="https://voidserverhub.net/images/oppenheimer_case.webp" loading="lazy" alt="Oppenheimer case evidence">
+                    </div>
+                    <div class="evidence-content">
+                        <h4>Key Characteristics:</h4>
+                        <ul>
+                            <li>Highly destructive methods</li>
+                            <li>Stealthy approaches to avoid detection</li>
+                            <li>Legacy of knowledge sharing</li>
+                            <li>Potential for copycat attackers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="imgModal" class="modal">
+        <span class="close" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        const img = document.getElementById("echoImg");
+        const modal = document.getElementById("imgModal");
+        const modalImg = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeModal");
+
+        img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        closeModal.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        modal.onclick = function (event) {
+            if (event.target === modal || event.target.className === "modal-content") {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://voidserverhub.net/images/vsh_purple.webp" loading="lazy" alt="Void Server Hub Logo">
+                        Void&nbsp;<span>Server</span>&nbsp;Hub
+                    </div>
+                    <p>A Network of Minecraft dedicated servers! Started June 11, 2021</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/vsh"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.pinterest.com/VoidServerHub/"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.youtube.com/@VoidServerHub"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/VoidServerHub"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#servers">Servers</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#allies">Allies</a></li>
+                        <li><a href="nuking.html">Nuking Info</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="mailto:voidserverhub@gmail.com">Contact</a></li>
+                        <li><a href="resources.html">Resource Page</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal.html">Regulations</a></li>
+                        <li><a href="#" onclick="return false;" style="color:gray; cursor:not-allowed;">Terms of Service (Coming Soon)</a></li>
+                        <li><a href="#" onclick="return false;" style="color:gray; cursor:not-allowed;">Privacy Policy</a></li>
+                        <li><a href="#" onclick="return false;" style="color:gray; cursor:not-allowed;">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
