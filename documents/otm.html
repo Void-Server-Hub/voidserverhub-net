@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Of The Month Competitions | Void Server Hub</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Of The Month Competitions | Void Server Hub">
+    <meta name="description" content="Celebrating excellence in the Minecraft community with our monthly competitions and awards.">
+
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/otm.html">
+    <meta property="og:title" content="Of The Month Competitions | Void Server Hub">
+    <meta property="og:description" content="Celebrating excellence in the Minecraft community with our monthly competitions and awards.">
+    <meta property="og:image" content="https://voidserverhub.net/images/otm-ad.webp">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/otm.html">
+    <meta name="twitter:title" content="Of The Month Competitions | Void Server Hub">
+    <meta name="twitter:description" content="Celebrating excellence in the Minecraft community with our monthly competitions and awards.">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-darker);
+            border-radius: 10px;
+            padding: 15px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            color: var(--accent);
+            background: rgba(106, 13, 173, 0.1);
+            padding-left: 25px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-10px); }
+            100% { transform: translateY(-50%) translateX(0); }
+        }
+
+        /* OTM Intro Section */
+        .otm-intro {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .otm-intro:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .otm-intro-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .otm-intro h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .otm-intro p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* OTM Categories Section */
+        .otm-categories {
+            background: var(--bg-darker);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .otm-categories:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(106,13,173,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .otm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .otm-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .otm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .otm-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .otm-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .otm-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .otm-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .otm-abbr {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .otm-desc {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .otm-winner {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+
+        .otm-winner-title {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .otm-winner-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .otm-winner-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .otm-nominate {
+            margin-top: 20px;
+        }
+
+        /* Current Nominations Section */
+        .current-nominations {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/4years_5scene.webp') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .nominations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .nomination-card {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .nomination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .nomination-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .nomination-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .nomination-card:hover .nomination-image img {
+            transform: scale(1.1);
+        }
+
+        .nomination-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--bg-darker);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .nomination-content {
+            padding: 20px;
+        }
+
+        .nomination-category {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .nomination-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .nomination-desc {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .nomination-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .nomination-stat {
+            display: flex;
+            align-items: center;
+        }
+
+        .nomination-stat i {
+            margin-right: 5px;
+            color: var(--accent);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--bg-darker);
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            position: relative;
+            padding: 30px;
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            font-size: 1.3rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .step-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-image {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg-darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                box-shadow: none;
+                padding: 10px 0 0 20px;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .otm-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo" class="preloader-logo">
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="servers.html">Servers <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="https://voidserverhub.net/servers/void-skygen.html">Void Skygen</a>
+                            <a href="https://voidserverhub.net/servers/skull-anarchy.html">Skull Anarchy</a>
+                            <a href="https://voidserverhub.net/servers/spacial-prisons.html">Spacial Prisons</a>
+                            <a href="https://voidserverhub.net/servers/culturehub-anarchy.html">Culturehub Anarchy</a>
+                            <a href="https://voidserverhub.net/servers/void-smp.html">Void SMP</a>
+                        </div>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="allies.html">Allies</a></li>
+                    <li><a href="otm.html" class="active">OTM</a></li>
+                    <li><a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Of The Month <span>Competitions</span></h1>
+                <p class="hero-subtitle">Celebrating excellence in the Minecraft community with our monthly awards and recognitions</p>
+                <div class="hero-buttons">
+                    <a href="#nominate" class="btn btn-primary">Nominate Now</a>
+                    <a href="#winners" class="btn btn-outline">Past Winners</a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://voidserverhub.net/images/otm-ad.webp" loading="lazy" alt="OTM Awards">
+            </div>
+        </div>
+        
+        <div class="particles" id="particles-js"></div>
+    </section>
+
+    <!-- OTM Intro Section -->
+    <section class="section otm-intro" id="about">
+        <div class="container">
+            <div class="otm-intro-content">
+                <h1 class="animate">Celebrating Excellence</h1>
+                <p class="animate delay-1">Each month, we recognize outstanding members of our community across various categories. These awards highlight the creativity, dedication, and passion that make our Minecraft network special.</p>
+                <div class="hero-buttons animate delay-2">
+                    <a href="#categories" class="btn btn-accent">View Categories</a>
+                    <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTM Categories Section -->
+    <section class="section otm-categories" id="categories">
+        <div class="container">
+            <h2 class="section-title animate">Award Categories</h2>
+            <p class="section-subtitle animate delay-1">Discover the different categories we recognize each month and our current winners</p>
+            
+            <div class="otm-grid">
+                <!-- GA-OTM -->
+                <div class="otm-card animate">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Golden Ally</h3>
+                            <span class="otm-abbr">GA-OTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Recognizing our most valuable partner server each month for their contributions to the community and collaborative spirit.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">Realm Hub</h4>
+                        <p class="otm-winner-desc">For their exceptional support and collaboration in cross-server events and community building.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate a Server</a>
+                </div>
+                
+                <!-- FS-OTM -->
+                <div class="otm-card animate delay-1">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Featured Server</h3>
+                            <span class="otm-abbr">FS-OTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Highlighting an outstanding server from our network that provides exceptional gameplay experiences.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">Void Skygen</h4>
+                        <p class="otm-winner-desc">For their innovative skyblock gameplay and active, welcoming community of players.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate a Server</a>
+                </div>
+                
+                <!-- ROTM -->
+                <div class="otm-card animate delay-2">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Realm of the Month</h3>
+                            <span class="otm-abbr">ROTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Celebrating the most impressive Minecraft Realm that demonstrates creativity, activity, and community engagement.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">Builders' Paradise</h4>
+                        <p class="otm-winner-desc">A stunning creative realm featuring incredible builds and a welcoming community of builders.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate a Realm</a>
+                </div>
+                
+                <!-- SOTM -->
+                <div class="otm-card animate">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Server of the Month</h3>
+                            <span class="otm-abbr">SOTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Awarded to the most outstanding server in our network based on gameplay, community, and innovation.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">Spacial Prisons</h4>
+                        <p class="otm-winner-desc">For their unique prison gameplay mechanics and consistently active player base.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate a Server</a>
+                </div>
+                
+                <!-- DOTM -->
+                <div class="otm-card animate delay-1">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Developer of the Month</h3>
+                            <span class="otm-abbr">DOTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Recognizing developers who create amazing plugins, tools, or contribute significantly to server development.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">TechWizard</h4>
+                        <p class="otm-winner-desc">For their innovative Skyblock plugin that revolutionized gameplay on multiple servers.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate a Developer</a>
+                </div>
+                
+                <!-- AOTM -->
+                <div class="otm-card animate delay-2">
+                    <div class="otm-header">
+                        <div class="otm-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <div>
+                            <h3 class="otm-title">Addon of the Month</h3>
+                            <span class="otm-abbr">AOTM</span>
+                        </div>
+                    </div>
+                    <p class="otm-desc">Highlighting the most useful, creative, or innovative Minecraft addon created by our community members.</p>
+                    
+                    <div class="otm-winner">
+                        <div class="otm-winner-title">Current Winner</div>
+                        <h4 class="otm-winner-name">Better Biomes</h4>
+                        <p class="otm-winner-desc">An addon that introduces stunning new biomes with custom terrain generation and resources.</p>
+                    </div>
+                    
+                    <a href="#nominate" class="btn btn-outline otm-nominate">Nominate an Addon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Nominations Section -->
+    <section class="section current-nominations" id="nominate">
+        <div class="container">
+            <h2 class="section-title animate">Current Paid Nominations</h2>
+            <p class="section-subtitle animate delay-1">Check out this month's paid nominees</p>
+            
+            <div class="nominations-grid">
+                <!-- Nomination 1 -->
+                <div class="nomination-card animate">
+                    <div class="nomination-image">
+                        <img src="https://voidserverhub.net/images/nominee1.webp" loading="lazy" alt="Nomination Image">
+                    </div>
+                    <div class="nomination-badge">Server</div>
+                    <div class="nomination-content">
+                        <div class="nomination-category">Type of Server</div>
+                        <h3 class="nomination-title">A Random Server</h3>
+                        <p class="nomination-desc">A description</p>
+                        <div class="nomination-stats">
+                            <div class="nomination-stat">
+                                <i class="fas fa-users"></i> 0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nomination 2 -->
+                <div class="nomination-card animate delay-1">
+                    <div class="nomination-image">
+                        <img src="https://voidserverhub.net/images/nominee2.webp" loading="lazy" alt="Nomination Image">
+                    </div>
+                    <div class="nomination-badge">Addon</div>
+                    <div class="nomination-content">
+                        <div class="nomination-category">Type of Addon</div>
+                        <h3 class="nomination-title">A Random Addon</h3>
+                        <p class="nomination-desc">A description</p>
+                        <div class="nomination-stats">
+                            <div class="nomination-stat">
+                                <i class="fas fa-users"></i> 0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nomination 3 -->
+                <div class="nomination-card animate delay-2">
+                    <div class="nomination-image">
+                        <img src="https://voidserverhub.net/images/nominee3.webp" loading="lazy" alt="Nomination Image">
+                    </div>
+                    <div class="nomination-badge">Realm</div>
+                    <div class="nomination-content">
+                        <div class="nomination-category">Type of Realm</div>
+                        <h3 class="nomination-title">A Random Realm</h3>
+                        <p class="nomination-desc">A Description.</p>
+                        <div class="nomination-stats">
+                            <div class="nomination-stat">
+                                <i class="fas fa-users"></i> 0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title animate">How It Works</h2>
+            <p class="section-subtitle animate delay-1">The process for nominating and selecting winners each month</p>
+            
+            <div class="steps">
+                <!-- Step 1 -->
+                <div class="step animate">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Nominations</h3>
+                    <p class="step-desc">Members would create a support ticket and pay for a nomination. Minimum entry fee is 10 dollars. Top 3 paid gets premium nomination, rest are in the announcement.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step animate delay-1">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Submitions</h3>
+                    <p class="step-desc">All normal submitions are taken almost the entire month until last week arives.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step animate delay-2">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Review</h3>
+                    <p class="step-desc">Our staff team reviews the top nominees and otm based on votes and community feedback.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="step animate delay-3">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Announcement</h3>
+                    <p class="step-desc">Winners are announced at the beginning of the following month with special recognition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title animate">Ready to Nominate?</h2>
+                <p class="cta-subtitle animate delay-1">Help recognize outstanding members of our community by submitting your nominations for next month's awards.</p>
+                <div class="hero-buttons animate delay-2">
+                    <a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord to Nominate</a>
+                    <a href="#categories" class="btn btn-outline">View Categories</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://voidserverhub.net/images/vsh_purple.webp" loading="lazy" alt="Void Server Hub Logo">
+                        Void&nbsp;<span>Server</span>&nbsp;Hub
+                    </div>
+                    <p>Celebrating the best of the Minecraft community through monthly awards and recognition.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/vsh"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.pinterest.com/VoidServerHub/"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.youtube.com/@VoidServerHub"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/VoidServerHub"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#servers">Servers</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#allies">Allies</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="mailto:voidserverhub@gmail.com">Contact</a></li>
+                        <li><a href="resources.html">Resource Page</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal.html">Terms of Service</a></li>
+                        <li><a href="legal.html">Privacy Policy</a></li>
+                        <li><a href="legal.html">DMCA Statement</a></li>
+                        <li><a href="legal.html">Credits & Usage Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            const progressBar = document.querySelector('.preloader-progress');
+            
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    progressBar.style.width = '100%';
+                    
+                    setTimeout(() => {
+                        preloader.classList.add('fade-out');
+                        
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 300);
+                } else {
+                    progressBar.style.width = progress + '%';
+                }
+            }, 100);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Scroll Header Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Scroll Animation
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Particles.js Configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would be where particles.js is initialized if you choose to include it
+            // particlesJS.load('particles-js', 'particles.json', function() {});
+        });
+    </script>
+</body>
+</html>
