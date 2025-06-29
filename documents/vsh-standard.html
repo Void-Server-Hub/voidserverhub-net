@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSH Standard | VSH</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="VSH Standard | VSH">
+    <meta name="description" content="The official operational and ethical guidelines required for all Void Server Hub partners, affiliates, and integrated networks.">
+
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/vsh-standard.html">
+    <meta property="og:title" content="VSH Standard | VSH">
+    <meta property="og:description" content="The official operational and ethical guidelines required for all Void Server Hub partners, affiliates, and integrated networks.">
+    <meta property="og:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/vsh-standard.html">
+    <meta name="twitter:title" content="VSH Standard | VSH">
+    <meta name="twitter:description" content="The official operational and ethical guidelines required for all Void Server Hub partners, affiliates, and integrated networks.">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(106, 13, 173, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white" opacity="0.5"/><circle cx="30" cy="25" r="0.5" fill="white" opacity="0.5"/><circle cx="70" cy="15" r="0.5" fill="white" opacity="0.5"/><circle cx="85" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="90" cy="80" r="0.5" fill="white" opacity="0.5"/><circle cx="60" cy="90" r="0.5" fill="white" opacity="0.5"/><circle cx="20" cy="75" r="0.5" fill="white" opacity="0.5"/><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.5"/></svg>');
+            background-size: cover;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* Standards Sections */
+        .standards-section {
+            background: var(--bg-darker);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 13, 173, 0.3);
+        }
+
+        .standards-header {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .standards-header:hover {
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+        }
+
+        .standards-header h3 {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .standards-header i {
+            transition: transform 0.3s ease;
+        }
+
+        .standards-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .standards-item {
+            padding: 30px;
+            border-bottom: 1px solid rgba(106, 13, 173, 0.2);
+        }
+
+        .standards-item:last-child {
+            border-bottom: none;
+        }
+
+        .standards-item h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .standards-item h4 i {
+            margin-right: 10px;
+        }
+
+        .standards-item p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .standards-item ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .standards-item li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .standards-item.active {
+            background: rgba(106, 13, 173, 0.05);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 80px 0 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh;
+                min-height: 400px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .standards-header h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 60vh;
+                min-height: 300px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .standards-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="https://voidserverhub.net" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+            
+            <a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">VSH <span>Standard</span></h1>
+                <p class="hero-subtitle">The official operational and ethical guidelines required for all partners, affiliates, and integrated networks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
+        <!-- Behavior Guidelines Section -->
+        <div class="standards-section">
+            <div class="standards-header">
+                <h3><i class="fas fa-users"></i> Behavior Guidelines</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="standards-content">
+                <div class="standards-item">
+                    <h4><i class="fas fa-brain"></i> Common Sense</h4>
+                    <p>All community interactions should be guided by common sense and mutual respect.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-ban"></i> Content Restrictions</h4>
+                    <ul>
+                        <li>No NSFW content or gore allowed anywhere</li>
+                        <li>No hate speech, slurs, racism, sexism, or attempts to bypass filters</li>
+                        <li>No irrelevant content - always post in the correct channels</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-comments"></i> Communication</h4>
+                    <ul>
+                        <li>Do not mass mention or tag staff unnecessarily</li>
+                        <li>Drama, arguments, and controversial topics are not allowed in public - take issues to DMs</li>
+                        <li>No spam or excessive text flooding</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-shield-alt"></i> Privacy & Safety</h4>
+                    <ul>
+                        <li>Personal data must not be shared or used maliciously (no doxxing, nuking, or threats)</li>
+                        <li>All communities must enforce a 13+ age minimum for member eligibility</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-bullhorn"></i> Promotion</h4>
+                    <p>Self-promotion or advertising must follow the outlined procedures - excessive ads are prohibited.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-language"></i> Language</h4>
+                    <p>Server operations must primarily be in English for clarity and moderation purposes.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-exclamation-triangle"></i> General Rule</h4>
+                    <p>Finding or exploiting loopholes in the rules is itself a violation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff & Community Eligibility Section -->
+        <div class="standards-section">
+            <div class="standards-header">
+                <h3><i class="fas fa-user-shield"></i> Staff & Community Eligibility</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="standards-content">
+                <div class="standards-item">
+                    <h4><i class="fas fa-user-slash"></i> Staff Restrictions</h4>
+                    <ul>
+                        <li>No known blacklisted or controversial individuals allowed in partnered staff teams</li>
+                        <li>Staff must have a clear history - no scams, nukes, hostile takeovers, or manipulative actions</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-users"></i> Community Representation</h4>
+                    <p>Any user representing a VSH-affiliated server reflects on that server; their actions may result in penalties for the community as a whole.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-gavel"></i> VSH Rights</h4>
+                    <p>VSH reserves the right to evaluate backgrounds and apply restrictions accordingly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting & Event Integrity Rules Section -->
+        <div class="standards-section">
+            <div class="standards-header">
+                <h3><i class="fas fa-vote-yea"></i> Voting & Event Integrity Rules</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="standards-content">
+                <div class="standards-item">
+                    <h4><i class="fas fa-check-circle"></i> Voting Principles</h4>
+                    <ul>
+                        <li>Voting is for fun, and community growth, not for bribery</li>
+                        <li>Encouraging votes is fine; harassment, blackmail, or forced votes are not</li>
+                        <li>Do not spam votes or DMs, especially toward people you don't regularly talk to</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-gift"></i> Giveaways</h4>
+                    <p>Giveaways may be announced only if you win; they are <strong>not</strong> to be used as vote incentives.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-money-bill-wave"></i> Monetary Incentives</h4>
+                    <p>Monetary bribes (e.g., Nitro, money) for votes are prohibited.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-user-secret"></i> Exploitation</h4>
+                    <p>Loopholes, alternate accounts, or exploiting vote mechanics will disqualify participants.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-users"></i> Community Responsibility</h4>
+                    <p>VSH-integrated communities are responsible for their members' conduct during events.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Consequences</h4>
+                    <p>Any violation can result in disqualification or removal from visibility</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance & Enforcement Section -->
+        <div class="standards-section">
+            <div class="standards-header">
+                <h3><i class="fas fa-balance-scale"></i> Compliance & Enforcement</h3>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="standards-content">
+                <div class="standards-item">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Consequences of Non-Compliance</h4>
+                    <p>Failure to meet these standards can lead to:</p>
+                    <ul>
+                        <li>Removal from the VSH Partner or Affiliate program</li>
+                        <li>Disconnection from the VSH Systems (e.g., Partnership, OTM Events)</li>
+                        <li>Public disqualification from contests (DOTM, ROTM, SOTM, etc.)</li>
+                    </ul>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-search"></i> Audits</h4>
+                    <p>VSH holds the right to audit or investigate concerns at any time.</p>
+                </div>
+                <div class="standards-item">
+                    <h4><i class="fas fa-shield-alt"></i> Enforcement Responsibility</h4>
+                    <p>Partnered communities must enforce these rules independently and seriously.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </div>
+            <div class="footer-about">
+                <p>VSH-Standard v1.0 | Enforced starting July 2025</p>
+            </div>
+            <div class="social-links">
+                <a href="https://discord.gg/vsh"><i class="fab fa-discord"></i></a>
+                <a href="https://www.pinterest.com/VoidServerHub/"><i class="fab fa-pinterest"></i></a>
+                <a href="https://www.youtube.com/@VoidServerHub"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/VoidServerHub"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Collapsible sections
+            const standardsHeaders = document.querySelectorAll('.standards-header');
+            standardsHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i.fa-chevron-down');
+                    
+                    // Toggle content
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.style.padding = '0';
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.padding = '20px 0';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                    
+                    // Close other sections
+                    standardsHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            const otherContent = otherHeader.nextElementSibling;
+                            const otherIcon = otherHeader.querySelector('i.fa-chevron-down');
+                            otherContent.style.maxHeight = null;
+                            otherContent.style.padding = '0';
+                            otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            });
+
+            // Open first section by default
+            if (standardsHeaders.length > 0) {
+                const firstContent = standardsHeaders[0].nextElementSibling;
+                firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+                firstContent.style.padding = '20px 0';
+                standardsHeaders[0].querySelector('i.fa-chevron-down').style.transform = 'rotate(180deg)';
+            }
+
+            // Back to Top Button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Highlight current section when scrolling
+            const standardsItems = document.querySelectorAll('.standards-item');
+            window.addEventListener('scroll', function() {
+                let fromTop = window.scrollY + 200;
+                
+                standardsItems.forEach(item => {
+                    if (item.offsetTop < fromTop && 
+                        item.offsetTop + item.offsetHeight > fromTop) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
