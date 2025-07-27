@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://xxvoidicxx.voidserverhub.net/*"
+  to = "/portfolios/xxvoidicxx/:splat"
+  status = 200
+  force = true
