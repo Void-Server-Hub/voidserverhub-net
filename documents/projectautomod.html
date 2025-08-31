@@ -1,27 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT AUTOMOD - Advanced Discord Security</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Project Automod | VSH</title>
+    <meta name="title" content="Void Server Hub">
+    <meta name="description" content="A Network of Minecraft dedicated servers! Started June 11, 2021">
+
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/documents/projectautomod">
+    <meta property="og:title" content="Void Server Hub">
+    <meta property="og:description" content="A Network of Minecraft dedicated servers! Started June 11, 2021">
+    <meta property="og:image" content="https://voidserverhub.net/images/projectautomod/hero.webp">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/">
+    <meta name="twitter:title" content="Void Server Hub">
+    <meta name="twitter:description" content="A Network of Minecraft dedicated servers! Started June 11, 2021">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/projectautomod/hero.webp">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/projectautomod/icon.webp">
+
     <style>
         :root {
-            --bg-dark: #0a0a12;
-            --bg-darker: #050509;
-            --primary: #6a0dad;
-            --primary-dark: #4b0082;
-            --primary-light: #9c4dff;
-            --accent: #ffffff;
-            --accent-glow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
-            --text: #f8f8f8;
-            --text-secondary: #d0d0d0;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --error: #f44336;
+            --primary-dark: #0a0a14;
+            --primary: #12121e;
+            --primary-light: #1a1a2e;
+            --accent: #6a0dad;
+            --accent-light: #9c4dff;
+            --accent-glow: rgba(156, 77, 255, 0.5);
+            --neon-white: #ffffff;
+            --neon-glow: rgba(255, 255, 255, 0.7);
+            --text: #f0f0f0;
+            --text-secondary: #b0b0b0;
         }
 
         * {
@@ -32,16 +54,13 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--primary-dark);
             color: var(--text);
             overflow-x: hidden;
             line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(106, 13, 173, 0.1) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(106, 13, 173, 0.1) 0%, transparent 25%);
         }
 
-        h1, h2, h3, h4 {
+        h1, h2, h3, h4, h5 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
@@ -62,7 +81,7 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 4px;
             font-weight: 600;
             text-align: center;
@@ -76,28 +95,27 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: white;
-            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+            box-shadow: 0 0 15px var(--accent-glow);
             border: none;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+            box-shadow: 0 0 25px var(--accent-glow);
         }
 
-        .btn-accent {
+        .btn-outline {
+            border: 2px solid var(--neon-white);
+            color: var(--neon-white);
             background: transparent;
-            color: var(--accent);
-            box-shadow: var(--accent-glow);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px var(--neon-glow);
         }
 
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+        .btn-outline:hover {
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px var(--neon-glow);
         }
 
         /* Preloader - Bot Activation Sequence */
@@ -107,49 +125,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-darker);
+            background: var(--primary-dark);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease-out;
+            transition: opacity 0.8s ease;
         }
 
         .preloader.fade-out {
             opacity: 0;
-            pointer-events: none;
         }
 
-        .activation-sequence {
-            text-align: center;
-            position: relative;
-        }
-
-        .star-logo {
+        .preloader-logo {
             width: 120px;
             height: 120px;
             margin-bottom: 30px;
             position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-logo img {
+            width: 100%;
+            height: 100%;
             filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-            animation: pulse 2s infinite ease-in-out, rotate 8s infinite linear;
         }
 
-        .star-core {
-            fill: white;
-            filter: url(#glow);
-        }
-
-        .status-text {
+        .preloader-text {
             font-family: 'Orbitron', monospace;
             font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 20px;
-            text-transform: uppercase;
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-glow);
             letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .progress-container {
+        .preloader-bar {
             width: 300px;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
@@ -158,90 +171,44 @@
             position: relative;
         }
 
-        .progress-bar {
+        .preloader-progress {
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            box-shadow: 0 0 10px var(--accent-glow);
             transition: width 0.5s ease;
         }
 
-        .system-messages {
-            margin-top: 30px;
+        .activation-sequence {
             font-family: 'Orbitron', monospace;
             font-size: 0.9rem;
             color: var(--text-secondary);
-            height: 100px;
+            margin-top: 30px;
+            text-align: center;
+            height: 60px;
             overflow: hidden;
-            text-align: left;
-            width: 400px;
-            border-left: 2px solid var(--primary);
-            padding-left: 15px;
         }
 
-        .message {
-            margin-bottom: 8px;
+        .sequence-line {
+            margin-bottom: 5px;
             opacity: 0;
             transform: translateY(10px);
-            animation: messageAppear 0.5s forwards;
-        }
-
-        @keyframes messageAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: sequenceFade 1.5s forwards;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Particle animation */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0;
-            animation: float linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) translateX(20px);
-                opacity: 0;
-            }
+        @keyframes sequenceFade {
+            0% { opacity: 0; transform: translateY(10px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
         }
 
         /* Header */
@@ -253,9 +220,9 @@
             padding: 20px 0;
             z-index: 1000;
             transition: all 0.3s ease;
-            background: rgba(10, 10, 18, 0.8);
+            background: rgba(10, 10, 20, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(106, 13, 173, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         header.scrolled {
@@ -272,17 +239,16 @@
         .logo {
             display: flex;
             align-items: center;
-            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: white;
-            text-transform: uppercase;
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-glow);
         }
 
         .logo img {
             height: 40px;
             margin-right: 10px;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
 
         .nav-links {
@@ -300,15 +266,15 @@
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
-            text-transform: uppercase;
             font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
-            text-shadow: var(--accent-glow);
+            color: var(--accent-light);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         .nav-links a:after {
@@ -318,8 +284,8 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent);
-            box-shadow: var(--accent-glow);
+            background: var(--accent-light);
+            box-shadow: 0 0 8px var(--accent-glow);
             transition: width 0.3s ease;
         }
 
@@ -328,6 +294,8 @@
         }
 
         .discord-login {
+            display: flex;
+            align-items: center;
             background: rgba(88, 101, 242, 0.2);
             border: 1px solid rgba(88, 101, 242, 0.5);
             padding: 8px 15px;
@@ -337,13 +305,19 @@
 
         .discord-login:hover {
             background: rgba(88, 101, 242, 0.3);
-            box-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+        }
+
+        .discord-login i {
+            margin-right: 8px;
+            color: white;
         }
 
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--neon-white);
         }
 
         /* Hero Section */
@@ -352,54 +326,67 @@
             min-height: 700px;
             display: flex;
             align-items: center;
+            background: linear-gradient(rgba(10, 10, 20, 0.9), rgba(10, 10, 20, 0.95)), 
+                        url('https://voidserverhub.net/images/projectautomod/background.webp') no-repeat center center/cover;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)), 
-                        url('https://voidserverhub.net/images/projectautomod/background.webp') no-repeat center center/cover;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(106, 13, 173, 0.1) 0%, transparent 50%);
+            z-index: 1;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 700px;
             position: relative;
             z-index: 2;
-            text-align: center;
-            margin: 0 auto;
         }
 
         .hero-title {
             font-size: 4rem;
             margin-bottom: 20px;
-            line-height: 1.2;
+            line-height: 1.1;
             animation: fadeInUp 1s ease;
-            text-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
+            color: var(--neon-white);
+            text-shadow: 0 0 20px var(--neon-glow);
+            letter-spacing: 3px;
         }
 
         .hero-title span {
-            color: var(--accent);
-            text-shadow: var(--accent-glow);
+            color: var(--accent-light);
+            text-shadow: 0 0 20px var(--accent-glow);
         }
 
         .hero-tagline {
-            font-size: 1.8rem;
-            color: var(--accent);
+            font-size: 1.5rem;
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-glow);
             margin-bottom: 15px;
             animation: fadeInUp 1s ease 0.2s forwards;
             opacity: 0;
-            text-shadow: var(--accent-glow);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
-        .hero-subtitle {
-            font-size: 1.2rem;
+        .hero-subtagline {
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: fadeInUp 1s ease 0.4s forwards;
             opacity: 0;
+            max-width: 600px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            gap: 15px;
             animation: fadeInUp 1s ease 0.6s forwards;
             opacity: 0;
         }
@@ -410,21 +397,30 @@
             top: 50%;
             transform: translateY(-50%);
             width: 40%;
-            max-width: 500px;
-            opacity: 0.7;
-            animation: float-vertical 6s ease-in-out infinite;
+            max-width: 600px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero-image img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 0 30px rgba(156, 77, 255, 0.5));
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -432,18 +428,18 @@
             }
         }
 
-        @keyframes float-vertical {
-            0% { transform: translateY(-50%) translateY(0); }
-            50% { transform: translateY(-50%) translateY(-15px); }
-            100% { transform: translateY(-50%) translateY(0); }
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-10px); }
+            100% { transform: translateY(-50%) translateX(0); }
         }
 
         /* Features Section */
         .features {
-            padding: 100px 0;
-            background: var(--bg-darker);
+            background: var(--primary);
             position: relative;
             overflow: hidden;
+            padding: 100px 0;
         }
 
         .features:before {
@@ -453,7 +449,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 70% 30%, rgba(106, 13, 173, 0.1) 0%, transparent 30%);
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(106,13,173,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
             z-index: 0;
         }
 
@@ -462,21 +459,20 @@
             margin-bottom: 20px;
             position: relative;
             display: inline-block;
-            text-align: center;
-            width: 100%;
+            color: var(--neon-white);
+            text-shadow: 0 0 15px var(--neon-glow);
         }
 
         .section-title:after {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--accent);
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-light);
+            box-shadow: 0 0 10px var(--accent-glow);
             border-radius: 2px;
-            box-shadow: var(--accent-glow);
         }
 
         .section-subtitle {
@@ -484,9 +480,6 @@
             color: var(--text-secondary);
             margin-bottom: 60px;
             max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
         }
 
         .features-grid {
@@ -498,7 +491,7 @@
         }
 
         .feature-card {
-            background: rgba(15, 15, 25, 0.7);
+            background: rgba(26, 26, 46, 0.5);
             border-radius: 10px;
             padding: 30px;
             transition: all 0.3s ease;
@@ -511,8 +504,8 @@
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-light);
         }
 
         .feature-card:before {
@@ -529,7 +522,7 @@
         .feature-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -537,14 +530,14 @@
             margin: 0 auto 20px;
             color: white;
             font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4), 0 0 0 5px rgba(106, 13, 173, 0.1);
+            box-shadow: 0 5px 20px var(--accent-glow);
         }
 
         .feature-title {
             font-size: 1.3rem;
             margin-bottom: 15px;
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-glow);
         }
 
         .feature-desc {
@@ -552,31 +545,33 @@
             margin-bottom: 20px;
         }
 
-        /* Fixed Notification */
-        .fixed-notification {
+        /* Notification Bar */
+        .notification-bar {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(15, 15, 25, 0.9);
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 46, 0.9);
             border: 1px solid rgba(106, 13, 173, 0.5);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 999;
             backdrop-filter: blur(5px);
-            z-index: 900;
             animation: slideInRight 0.5s ease;
+            max-width: 400px;
         }
 
         .notification-icon {
             width: 40px;
             height: 40px;
+            margin-right: 15px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+            border: 2px solid var(--accent-light);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .notification-icon img {
@@ -586,42 +581,42 @@
         }
 
         .notification-content {
-            flex-grow: 1;
+            flex: 1;
         }
 
-        .notification-content p {
+        .notification-text {
             font-size: 0.9rem;
             color: var(--text);
             margin-bottom: 5px;
         }
 
         .notification-btn {
-            padding: 8px 15px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 6px 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: white;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
             border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
         }
 
         .notification-btn:hover {
+            box-shadow: 0 0 15px var(--accent-glow);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.5);
         }
 
         @keyframes slideInRight {
             from {
-                transform: translateX(100px);
                 opacity: 0;
+                transform: translateX(100px);
             }
             to {
-                transform: translateX(0);
                 opacity: 1;
+                transform: translateX(0);
             }
         }
 
@@ -633,14 +628,15 @@
             
             .hero-content {
                 max-width: 100%;
+                text-align: center;
             }
             
-            .hero-title {
-                font-size: 3rem;
+            .hero-buttons {
+                justify-content: center;
             }
             
-            .hero-tagline {
-                font-size: 1.5rem;
+            .section-title {
+                font-size: 2rem;
             }
         }
 
@@ -651,7 +647,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background: var(--bg-darker);
+                background: var(--primary-dark);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -675,21 +671,15 @@
                 font-size: 2.5rem;
             }
             
-            .hero-tagline {
-                font-size: 1.3rem;
+            .section {
+                padding: 60px 0;
             }
-            
-            .hero-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .fixed-notification {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                flex-direction: column;
-                text-align: center;
+
+            .notification-bar {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
             }
         }
 
@@ -699,15 +689,33 @@
             }
             
             .hero-tagline {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
-            .hero-subtitle {
+            .hero-subtagline {
                 font-size: 1rem;
             }
             
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+
+            .discord-login span {
+                display: none;
+            }
+
+            .discord-login i {
+                margin-right: 0;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -715,45 +723,37 @@
 <body>
     <!-- Preloader - Bot Activation Sequence -->
     <div class="preloader">
+        <div class="preloader-logo">
+            <img src="https://voidserverhub.net/images/projectautomod/icon.webp" alt="Project Automod Logo">
+        </div>
+        <div class="preloader-text">INITIALIZING SECURITY PROTOCOLS</div>
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
         <div class="activation-sequence">
-            <svg class="star-logo" viewBox="0 0 100 100">
-                <defs>
-                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="glow" />
-                        <feComposite in="SourceGraphic" in2="glow" operator="over" />
-                    </filter>
-                </defs>
-                <polygon class="star-core" points="50,5 61,35 93,35 67,55 78,85 50,67 22,85 33,55 7,35 39,35" />
-            </svg>
-            <div class="status-text">INITIALIZING SECURITY PROTOCOLS</div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="system-messages" id="systemMessages">
-                <!-- Messages will be added by JavaScript -->
-            </div>
+            <div class="sequence-line">> SYSTEM BOOT [OK]</div>
+            <div class="sequence-line">> MODULE LOAD [OK]</div>
+            <div class="sequence-line">> SECURITY SCAN [OK]</div>
+            <div class="sequence-line">> NEURAL NET [ACTIVE]</div>
+            <div class="sequence-line">> PROJECT AUTOMOD [READY]</div>
         </div>
     </div>
-
-    <!-- Particle Animation -->
-    <div class="particles" id="particles"></div>
 
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo">
-                <svg width="40" height="40" viewBox="0 0 100 100">
-                    <polygon fill="#ffffff" points="50,15 60,40 85,40 65,55 75,85 50,70 25,85 35,55 15,40 40,40" filter="url(#glow)"/>
-                </svg>
+                <img src="https://voidserverhub.net/images/projectautomod/icon.webp" alt="Project Automod Logo">
                 PROJECT AUTOMOD
             </a>
             
             <nav>
                 <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="https://discord.gg/UWTEt8dpVA">Support</a></li>
-                    <li><a href="#" class="discord-login">Discord Login</a></li>
+                    <li><a href="https://discord.com/oauth2/authorize?client_id=1409249621867364513" class="btn btn-primary">Add Bot</a></li>
+                    <li><a href="#" class="discord-login"><i class="fab fa-discord"></i> <span>Login</span></a></li>
                 </ul>
             </nav>
             
@@ -769,29 +769,31 @@
             <div class="hero-content">
                 <h1 class="hero-title">PROJECT <span>AUTOMOD</span></h1>
                 <p class="hero-tagline">Shows you the truth you couldn't see before.</p>
-                <p class="hero-subtitle">Protects Your Server · Clears Messages · Logs Violations · Strongest Automod</p>
+                <p class="hero-subtagline">Protects Your Server · Clears Messages · Logs Violations · Strongest Automod</p>
                 <div class="hero-buttons">
                     <a href="https://discord.com/oauth2/authorize?client_id=1409249621867364513" class="btn btn-primary">Add to Discord</a>
-                    <a href="https://discord.gg/UWTEt8dpVA" class="btn btn-accent">Support Server</a>
+                    <a href="https://discord.gg/UWTEt8dpVA" class="btn btn-outline">Support Server</a>
                 </div>
             </div>
             
             <div class="hero-image">
-                <img src="https://voidserverhub.net/images/projectautomod/hero.webp" alt="Project Automod Interface">
+                <img src="https://voidserverhub.net/images/projectautomod/hero.webp" loading="lazy" alt="Project Automod Interface">
             </div>
         </div>
+        
+        <div class="particles" id="particles-js"></div>
     </section>
 
     <!-- Features Section -->
-    <section class="section features" id="features">
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">Advanced Protection Features</h2>
-            <p class="section-subtitle">Powerful automoderation tools to keep your server safe and clean</p>
+            <h2 class="section-title">Powerful Protection</h2>
+            <p class="section-subtitle">Advanced automoderation features to keep your server safe and clean</p>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="feature-title">Auto Moderation</h3>
                     <p class="feature-desc">Automatically detects and removes slurs, bypass attempts, and unwanted content with advanced filtering.</p>
@@ -802,7 +804,7 @@
                         <i class="fas fa-search"></i>
                     </div>
                     <h3 class="feature-title">Guild Scan</h3>
-                    <p class="feature-desc">Scan your entire server to identify potential risks and users with violation histories.</p>
+                    <p class="feature-desc">Scan your entire server to identify users of concern and view their violation history.</p>
                 </div>
                 
                 <div class="feature-card">
@@ -810,146 +812,247 @@
                         <i class="fas fa-clipboard-list"></i>
                     </div>
                     <h3 class="feature-title">Mod Logs</h3>
-                    <p class="feature-desc">Comprehensive logging system that tracks all violations with context, timestamps, and evidence.</p>
+                    <p class="feature-desc">Comprehensive logs for all violations with context, timestamps, and user history.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-user-shield"></i>
+                        <i class="fas fa-user-secret"></i>
                     </div>
-                    <h3 class="feature-title">User Analysis</h3>
-                    <p class="feature-desc">Deep scan individual users to see their violation history and potential risk level.</p>
+                    <h3 class="feature-title">User Scanning</h3>
+                    <p class="feature-desc">Scan specific users to view all their violations, context, and patterns of behavior.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Fixed Notification -->
-    <div class="fixed-notification">
+    <!-- Notification Bar -->
+    <div class="notification-bar">
         <div class="notification-icon">
             <img src="https://voidserverhub.net/images/projectautomod/icon.webp" alt="Project Automod Icon">
         </div>
         <div class="notification-content">
-            <p>Add Project Automod to your server for advanced protection</p>
+            <p class="notification-text">Add Project Automod to your server for advanced protection</p>
         </div>
-        <a href="https://discord.com/oauth2/authorize?client_id=1409249621867364513" class="notification-btn">Add to Server</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1409249621867364513" class="notification-btn">Add Now</a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Enhanced Preloader with Bot Activation Sequence
-        document.addEventListener('DOMContentLoaded', function() {
+        // Preloader with bot activation sequence
+        window.addEventListener('load', function() {
             const preloader = document.querySelector('.preloader');
-            const progressBar = document.getElementById('progressBar');
-            const systemMessages = document.getElementById('systemMessages');
-            const messages = [
-                "> Loading core modules...",
-                "> Initializing security protocols...",
-                "> Connecting to Discord API...",
-                "> Loading filter databases...",
-                "> Starting violation detection systems...",
-                "> Project Automod is ready!"
-            ];
+            const progress = document.querySelector('.preloader-progress');
+            const sequenceLines = document.querySelectorAll('.sequence-line');
             
-            let currentMessage = 0;
-            let progress = 0;
+            // Simulate loading progress with activation messages
+            let width = 0;
+            let currentLine = 0;
             
-            // Create floating particles
-            createParticles();
-            
-            // Simulate system boot sequence
-            const bootInterval = setInterval(function() {
-                if (currentMessage < messages.length) {
-                    const messageElement = document.createElement('div');
-                    messageElement.className = 'message';
-                    messageElement.textContent = messages[currentMessage];
-                    systemMessages.appendChild(messageElement);
-                    
-                    // Scroll to bottom
-                    systemMessages.scrollTop = systemMessages.scrollHeight;
-                    
-                    currentMessage++;
-                    progress = (currentMessage / messages.length) * 100;
-                    progressBar.style.width = progress + '%';
-                    
-                    if (currentMessage === messages.length) {
-                        clearInterval(bootInterval);
-                        
-                        // Complete loading after last message
-                        setTimeout(function() {
-                            preloader.classList.add('fade-out');
-                            setTimeout(function() {
-                                preloader.style.display = 'none';
-                            }, 800);
-                        }, 1000);
-                    }
-                }
-            }, 600);
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Header scroll effect
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Create floating particles function
-            function createParticles() {
-                const particlesContainer = document.getElementById('particles');
-                const particleCount = 50;
+            const progressInterval = setInterval(function() {
+                width += 2;
+                progress.style.width = width + '%';
                 
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    
-                    // Random properties
-                    const size = Math.random() * 3 + 1;
-                    const posX = Math.random() * 100;
-                    const duration = Math.random() * 15 + 10;
-                    const delay = Math.random() * 10;
-                    
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.left = `${posX}vw`;
-                    particle.style.animationDuration = `${duration}s`;
-                    particle.style.animationDelay = `${delay}s`;
-                    
-                    particlesContainer.appendChild(particle);
+                // Show sequence lines at specific intervals
+                if (width % 20 === 0 && currentLine < sequenceLines.length) {
+                    sequenceLines[currentLine].style.animation = 'none';
+                    void sequenceLines[currentLine].offsetWidth; // Trigger reflow
+                    sequenceLines[currentLine].style.animation = 'sequenceFade 1.5s forwards';
+                    currentLine++;
                 }
-            }
+                
+                if (width >= 100) {
+                    clearInterval(progressInterval);
+                    setTimeout(function() {
+                        preloader.classList.add('fade-out');
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 800);
+                    }, 1000);
+                }
+            }, 50);
             
-            // Animate elements on scroll
-            const animateElements = document.querySelectorAll('.feature-card, .section-title, .section-subtitle');
+            // Initialize animations
+            initAnimations();
+            
+            // Initialize particles
+            if (document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#ffffff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 3,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#ffffff",
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "bubble"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 400,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 200,
+                                "size": 6,
+                                "duration": 2,
+                                "opacity": 0.4,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function initAnimations() {
+            const animateElements = document.querySelectorAll('.hero-title, .hero-tagline, .hero-subtagline, .hero-buttons, .section-title, .section-subtitle, .feature-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, {
+                threshold: 0.1
+            });
             
-            // Set initial state for animated elements
             animateElements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(20px)';
                 element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(element);
             });
-        });
+        }
     </script>
 </body>
 </html>
