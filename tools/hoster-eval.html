@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSH Candidate Trial Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+            --section-a: rgba(106, 13, 173, 0.2);
+            --section-b: rgba(0, 150, 255, 0.2);
+            --section-c: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .question-card {
+            display: none;
+        }
+
+        .question-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(106, 13, 173, 0.3);
+        }
+
+        .question-number {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .question-section {
+            font-size: 0.9rem;
+            background: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            background: rgba(26, 26, 46, 0.7);
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background: rgba(106, 13, 173, 0.2);
+            border-color: var(--primary);
+        }
+
+        .option.selected {
+            background: rgba(106, 13, 173, 0.4);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .progress-container {
+            margin: 40px 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--error), var(--warning), var(--success));
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-fill:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .results-container {
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .evaluation-message {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(26, 26, 46, 0.7);
+            border-left: 5px solid var(--primary);
+        }
+
+        .section-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .breakdown-card {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .breakdown-title {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .breakdown-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-a .breakdown-value {
+            color: var(--primary-light);
+        }
+
+        .section-b .breakdown-value {
+            color: #0096ff;
+        }
+
+        .section-c .breakdown-value {
+            color: var(--accent);
+        }
+
+        .interim-analysis {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .interim-analysis.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .analysis-card {
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid var(--warning);
+        }
+
+        .analysis-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .analysis-text {
+            margin-bottom: 15px;
+        }
+
+        .analysis-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>VSH Candidate Trial Analyzer</h1>
+            <p>Evaluate server ownership candidates based on experience, exam performance, and trial server results</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Evaluation Progress</span>
+                <span id="progressText">Question 1 of 50</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="questionProgress"></div>
+            </div>
+            <div class="progress-labels">
+                <span>Section A</span>
+                <span>Section B</span>
+                <span>Section C</span>
+            </div>
+        </div>
+
+        <div id="questionContainer">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+
+        <div class="interim-analysis" id="interimAnalysis">
+            <div class="analysis-card">
+                <h3 class="analysis-title">Interim Evaluation</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="interimScoreBar"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>-100</span>
+                    <span>0</span>
+                    <span>+100</span>
+                </div>
+                <p class="analysis-text" id="interimEvaluationText"></p>
+                <div class="analysis-actions">
+                    <button class="btn btn-primary" id="continueToTrial">Continue to Trial Evaluation</button>
+                    <button class="btn btn-outline" id="reviewAnswers">Review Answers</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="card">
+                <div class="score-display">
+                    <h2>Final Evaluation Score</h2>
+                    <div class="score-value" id="finalScore">0</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="finalScoreBar"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span>-100</span>
+                        <span>0</span>
+                        <span>+100</span>
+                    </div>
+                </div>
+                
+                <div class="evaluation-message" id="evaluationMessage">
+                    <!-- Evaluation message will be inserted here -->
+                </div>
+                
+                <h3>Section Breakdown</h3>
+                <div class="section-breakdown">
+                    <div class="breakdown-card section-a">
+                        <div class="breakdown-title">Candidate Experience</div>
+                        <div class="breakdown-value" id="sectionAScore">0</div>
+                    </div>
+                    <div class="breakdown-card section-b">
+                        <div class="breakdown-title">Exam Performance</div>
+                        <div class="breakdown-value" id="sectionBScore">0</div>
+                    </div>
+                    <div class="breakdown-card section-c">
+                        <div class="breakdown-title">Trial Server</div>
+                        <div class="breakdown-value" id="sectionCScore">0</div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="resetEvaluation">Start New Evaluation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Question data with weights
+        const questions = [
+            // Section A: Experience with Candidate (Q1-Q5)
+            {
+                section: "A",
+                text: "How long have you known the candidate?",
+                options: [
+                    { text: "Less than 1 month", value: -20 },
+                    { text: "1-3 months", value: -5 },
+                    { text: "3-6 months", value: 10 },
+                    { text: "6-12 months", value: 20 },
+                    { text: "More than 1 year", value: 30 }
+                ],
+                weight: 1.0
+            },
+            {
+                section: "A",
+                text: "How consistent has their activity been in VSH projects?",
+                options: [
+                    { text: "Very inconsistent", value: -30 },
+                    { text: "Somewhat inconsistent", value: -10 },
+                    { text: "Average consistency", value: 10 },
+                    { text: "Mostly consistent", value: 20 },
+                    { text: "Extremely consistent", value: 30 }
+                ],
+                weight: 1.2
+            },
+            {
+                section: "A",
+                text: "How reliable are they under high-pressure situations?",
+                options: [
+                    { text: "Not reliable at all", value: -30 },
+                    { text: "Struggles under pressure", value: -10 },
+                    { text: "Average performance", value: 10 },
+                    { text: "Generally reliable", value: 25 },
+                    { text: "Exceptionally reliable", value: 35 }
+                ],
+                weight: 1.5
+            },
+            {
+                section: "A",
+                text: "Have they shown initiative in previous server/asset operations?",
+                options: [
+                    { text: "No initiative shown", value: -20 },
+                    { text: "Rarely shows initiative", value: 0 },
+                    { text: "Occasional initiative", value: 15 },
+                    { text: "Frequently shows initiative", value: 25 },
+                    { text: "Consistently takes initiative", value: 35 }
+                ],
+                weight: 1.3
+            },
+            {
+                section: "A",
+                text: "How well do they communicate and collaborate with staff and executives?",
+                options: [
+                    { text: "Poor communicator", value: -25 },
+                    { text: "Below average", value: -5 },
+                    { text: "Average communicator", value: 15 },
+                    { text: "Good communicator", value: 25 },
+                    { text: "Excellent communicator", value: 35 }
+                ],
+                weight: 1.4
+            },
+            // Section B: Exam Performance (Q6-Q25)
+            {
+                section: "B",
+                text: "Does the candidate understand VSH server ownership rules?",
+                options: [
+                    { text: "No understanding", value: -30 },
+                    { text: "Basic understanding", value: 10 },
+                    { text: "Good understanding", value: 25 },
+                    { text: "Excellent understanding", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "B",
+                text: "Can they clearly explain Discord/MCBE compliance guidelines?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With significant help", value: 5 },
+                    { text: "With some help", value: 20 },
+                    { text: "Yes, clearly", value: 35 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "B",
+                text: "Do they demonstrate knowledge of proper staff hierarchy?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Partial knowledge", value: 10 },
+                    { text: "Good knowledge", value: 25 },
+                    { text: "Excellent knowledge", value: 35 }
+                ],
+                weight: 1.7
+            },
+            {
+                section: "B",
+                text: "Can they handle disputes between staff members fairly?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With major issues", value: 5 },
+                    { text: "With minor issues", value: 20 },
+                    { text: "Yes, fairly and effectively", value: 35 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "B",
+                text: "Do they understand how to maintain server performance (lag, backups, updates)?",
+                options: [
+                    { text: "No understanding", value: -30 },
+                    { text: "Basic understanding", value: 10 },
+                    { text: "Good understanding", value: 25 },
+                    { text: "Excellent understanding", value: 35 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "B",
+                text: "Can they identify and mitigate potential security risks?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "With guidance", value: 10 },
+                    { text: "With some guidance", value: 25 },
+                    { text: "Yes, independently", value: 40 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "B",
+                text: "Do they know how to handle budget allocations responsibly?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "With supervision", value: 10 },
+                    { text: "With minimal supervision", value: 25 },
+                    { text: "Yes, responsibly", value: 35 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "B",
+                text: "Can they explain proper promotion/demotion procedures?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "With significant gaps", value: 5 },
+                    { text: "With minor gaps", value: 20 },
+                    { text: "Yes, comprehensively", value: 30 }
+                ],
+                weight: 1.6
+            },
+            {
+                section: "B",
+                text: "Do they recognize the importance of user retention strategies?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Minimal recognition", value: 10 },
+                    { text: "Good recognition", value: 25 },
+                    { text: "Excellent understanding", value: 35 }
+                ],
+                weight: 1.7
+            },
+            {
+                section: "B",
+                text: "Can they propose creative solutions to keep a realm active?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "Basic ideas", value: 10 },
+                    { text: "Good ideas", value: 25 },
+                    { text: "Excellent, innovative ideas", value: 35 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "B",
+                text: "Do they demonstrate foresight in long-term planning?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Minimal foresight", value: 10 },
+                    { text: "Good foresight", value: 25 },
+                    { text: "Excellent strategic planning", value: 35 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "B",
+                text: "Can they react appropriately to sudden downtime or server issues?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "With major issues", value: 5 },
+                    { text: "With minor issues", value: 25 },
+                    { text: "Yes, effectively", value: 40 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "B",
+                text: "Do they understand basic plugin/add-on management?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "Basic understanding", value: 10 },
+                    { text: "Good understanding", value: 25 },
+                    { text: "Excellent understanding", value: 35 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "B",
+                text: "Can they enforce VSH standards without being overbearing?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "Struggles with balance", value: 5 },
+                    { text: "Generally good balance", value: 25 },
+                    { text: "Excellent balance", value: 35 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "B",
+                text: "Are they able to prioritize tasks effectively?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "With significant issues", value: 5 },
+                    { text: "With minor issues", value: 20 },
+                    { text: "Yes, effectively", value: 35 }
+                ],
+                weight: 1.9
+            },
+            {
+                section: "B",
+                text: "Did the candidate remain calm under exam pressure?",
+                options: [
+                    { text: "No, became very stressed", value: -25 },
+                    { text: "Somewhat stressed", value: 10 },
+                    { text: "Mostly calm", value: 25 },
+                    { text: "Completely composed", value: 35 }
+                ],
+                weight: 1.5
+            },
+            {
+                section: "B",
+                text: "Did they answer thoughtfully rather than hastily?",
+                options: [
+                    { text: "No, mostly hasty answers", value: -25 },
+                    { text: "Some thoughtful answers", value: 10 },
+                    { text: "Mostly thoughtful", value: 25 },
+                    { text: "All answers were thoughtful", value: 35 }
+                ],
+                weight: 1.6
+            },
+            {
+                section: "B",
+                text: "Did they demonstrate learning from prior mistakes?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "Minimal demonstration", value: 10 },
+                    { text: "Clear demonstration", value: 25 },
+                    { text: "Excellent demonstration", value: 35 }
+                ],
+                weight: 1.7
+            },
+            {
+                section: "B",
+                text: "Did they show attention to detail throughout the exam?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Some attention", value: 10 },
+                    { text: "Good attention", value: 25 },
+                    { text: "Excellent attention", value: 35 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "B",
+                text: "Overall, how well do they grasp the theoretical concepts required for server ownership?",
+                options: [
+                    { text: "Poor understanding", value: -30 },
+                    { text: "Basic understanding", value: 10 },
+                    { text: "Good understanding", value: 30 },
+                    { text: "Excellent understanding", value: 45 }
+                ],
+                weight: 2.5
+            },
+            // Section C: Trial Server Performance (Q26-Q50)
+            {
+                section: "C",
+                text: "Did the candidate properly set up the trial server environment?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With major issues", value: 5 },
+                    { text: "With minor issues", value: 25 },
+                    { text: "Yes, perfectly", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Was server uptime maintained consistently during the trial?",
+                options: [
+                    { text: "No, frequent downtime", value: -35 },
+                    { text: "Some downtime", value: 10 },
+                    { text: "Minimal downtime", value: 30 },
+                    { text: "Perfect uptime", value: 45 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "C",
+                text: "Did they manage staff effectively and assign roles appropriately?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With major issues", value: 5 },
+                    { text: "With minor issues", value: 25 },
+                    { text: "Yes, effectively", value: 40 }
+                ],
+                weight: 2.1
+            },
+            {
+                section: "C",
+                text: "Were any staff complaints handled promptly and fairly?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "With significant delays/issues", value: 5 },
+                    { text: "With minor delays/issues", value: 25 },
+                    { text: "Yes, promptly and fairly", value: 40 }
+                ],
+                weight: 2.3
+            },
+            {
+                section: "C",
+                text: "Did they implement server updates and fixes on time?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With significant delays", value: 5 },
+                    { text: "With minor delays", value: 25 },
+                    { text: "Yes, promptly", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Were server resources optimized to prevent lag or downtime?",
+                options: [
+                    { text: "No, frequent lag/downtime", value: -35 },
+                    { text: "Some optimization", value: 10 },
+                    { text: "Good optimization", value: 30 },
+                    { text: "Excellent optimization", value: 45 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "C",
+                text: "Did they follow VSH compliance rules throughout the trial?",
+                options: [
+                    { text: "No", value: -40 },
+                    { text: "With significant violations", value: 0 },
+                    { text: "With minor violations", value: 25 },
+                    { text: "Yes, completely", value: 45 }
+                ],
+                weight: 2.5
+            },
+            {
+                section: "C",
+                text: "Did they actively communicate with the staff team daily?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Minimal communication", value: 10 },
+                    { text: "Regular communication", value: 30 },
+                    { text: "Excellent communication", value: 40 }
+                ],
+                weight: 1.9
+            },
+            {
+                section: "C",
+                text: "Were community members engaged and retained?",
+                options: [
+                    { text: "No, poor retention", value: -30 },
+                    { text: "Some retention", value: 15 },
+                    { text: "Good retention", value: 35 },
+                    { text: "Excellent retention", value: 45 }
+                ],
+                weight: 2.1
+            },
+            {
+                section: "C",
+                text: "Did they handle disputes between players effectively?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With major issues", value: 5 },
+                    { text: "With minor issues", value: 25 },
+                    { text: "Yes, effectively", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Did they demonstrate problem-solving during unexpected server issues?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "With significant help", value: 5 },
+                    { text: "With some help", value: 25 },
+                    { text: "Yes, independently", value: 45 }
+                ],
+                weight: 2.3
+            },
+            {
+                section: "C",
+                text: "Were server backups maintained regularly?",
+                options: [
+                    { text: "No", value: -40 },
+                    { text: "Irregular backups", value: 10 },
+                    { text: "Regular backups", value: 35 },
+                    { text: "Excellent backup system", value: 50 }
+                ],
+                weight: 2.5
+            },
+            {
+                section: "C",
+                text: "Did they show initiative in adding new features or events?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "Minimal initiative", value: 15 },
+                    { text: "Good initiative", value: 30 },
+                    { text: "Excellent initiative", value: 40 }
+                ],
+                weight: 1.9
+            },
+            {
+                section: "C",
+                text: "Did they monitor and enforce community rules consistently?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "Inconsistent enforcement", value: 10 },
+                    { text: "Mostly consistent", value: 30 },
+                    { text: "Perfectly consistent", value: 45 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "C",
+                text: "Were trial server goals met (activity, engagement, performance)?",
+                options: [
+                    { text: "No goals met", value: -40 },
+                    { text: "Some goals met", value: 15 },
+                    { text: "Most goals met", value: 35 },
+                    { text: "All goals met/exceeded", value: 50 }
+                ],
+                weight: 2.5
+            },
+            {
+                section: "C",
+                text: "Did they document trial activities clearly for reporting purposes?",
+                options: [
+                    { text: "No documentation", value: -25 },
+                    { text: "Minimal documentation", value: 10 },
+                    { text: "Good documentation", value: 30 },
+                    { text: "Excellent documentation", value: 40 }
+                ],
+                weight: 1.8
+            },
+            {
+                section: "C",
+                text: "Did they balance multiple responsibilities without neglecting tasks?",
+                options: [
+                    { text: "No, many neglected tasks", value: -35 },
+                    { text: "Some neglected tasks", value: 10 },
+                    { text: "Minor neglect", value: 30 },
+                    { text: "Perfect balance", value: 45 }
+                ],
+                weight: 2.1
+            },
+            {
+                section: "C",
+                text: "Did they adjust their approach based on staff or player feedback?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "Minimal adjustment", value: 10 },
+                    { text: "Good adjustment", value: 30 },
+                    { text: "Excellent responsiveness", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Were conflicts escalated properly when necessary?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With significant issues", value: 5 },
+                    { text: "With minor issues", value: 25 },
+                    { text: "Yes, appropriately", value: 40 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Did they maintain motivation and leadership presence throughout the trial?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "With significant lapses", value: 10 },
+                    { text: "With minor lapses", value: 30 },
+                    { text: "Consistently strong", value: 45 }
+                ],
+                weight: 2.2
+            },
+            {
+                section: "C",
+                text: "Were server logs and performance metrics monitored and analyzed?",
+                options: [
+                    { text: "No", value: -30 },
+                    { text: "Minimal monitoring", value: 10 },
+                    { text: "Regular monitoring", value: 30 },
+                    { text: "Thorough analysis", value: 45 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Did they plan and execute at least one server-wide event successfully?",
+                options: [
+                    { text: "No", value: -25 },
+                    { text: "Attempted but unsuccessful", value: 10 },
+                    { text: "Successful event", value: 35 },
+                    { text: "Excellent event(s)", value: 45 }
+                ],
+                weight: 2.0
+            },
+            {
+                section: "C",
+                text: "Did they maintain transparency with VSH leadership about issues?",
+                options: [
+                    { text: "No", value: -35 },
+                    { text: "Minimal transparency", value: 10 },
+                    { text: "Good transparency", value: 35 },
+                    { text: "Excellent transparency", value: 45 }
+                ],
+                weight: 2.3
+            },
+            {
+                section: "C",
+                text: "Did they demonstrate creativity in improving server engagement?",
+                options: [
+                    { text: "No", value: -20 },
+                    { text: "Minimal creativity", value: 15 },
+                    { text: "Good creativity", value: 30 },
+                    { text: "Excellent innovation", value: 40 }
+                ],
+                weight: 1.9
+            },
+            {
+                section: "C",
+                text: "Overall, would you recommend this candidate for permanent server leadership based on trial performance?",
+                options: [
+                    { text: "Strongly not recommend", value: -50 },
+                    { text: "Not recommend", value: -10 },
+                    { text: "Neutral", value: 20 },
+                    { text: "Recommend", value: 40 },
+                    { text: "Strongly recommend", value: 60 }
+                ],
+                weight: 3.0
+            }
+        ];
+
+        // State management
+        let currentQuestion = 0;
+        let answers = Array(questions.length).fill(null);
+        let sectionAScore = 0;
+        let sectionBScore = 0;
+        let sectionCScore = 0;
+        let maxSectionAScore = 0;
+        let maxSectionBScore = 0;
+        let maxSectionCScore = 0;
+
+        // Initialize the evaluation
+        function initEvaluation() {
+            // Calculate maximum possible scores for each section
+            questions.forEach((question, index) => {
+                if (question.section === "A") {
+                    const maxOptionValue = Math.max(...question.options.map(opt => Math.max(0, opt.value)));
+                    maxSectionAScore += maxOptionValue * question.weight;
+                } else if (question.section === "B") {
+                    const maxOptionValue = Math.max(...question.options.map(opt => Math.max(0, opt.value)));
+                    maxSectionBScore += maxOptionValue * question.weight;
+                } else if (question.section === "C") {
+                    const maxOptionValue = Math.max(...question.options.map(opt => Math.max(0, opt.value)));
+                    maxSectionCScore += maxOptionValue * question.weight;
+                }
+            });
+
+            // Render first question
+            renderQuestion(currentQuestion);
+            updateProgress();
+        }
+
+        // Render a question
+        function renderQuestion(index) {
+            const question = questions[index];
+            const questionContainer = document.getElementById('questionContainer');
+            
+            // Create question card HTML
+            let html = `
+                <div class="card question-card ${index === currentQuestion ? 'active' : ''}" id="question-${index}">
+                    <div class="question-header">
+                        <span class="question-number">Question ${index + 1}</span>
+                        <span class="question-section">Section ${question.section}</span>
+                    </div>
+                    <p class="question-text">${question.text}</p>
+                    <div class="options-container" id="options-${index}">
+            `;
+
+            // Add options
+            question.options.forEach((option, optIndex) => {
+                const isSelected = answers[index] === optIndex;
+                html += `
+                    <div class="option ${isSelected ? 'selected' : ''}" data-index="${optIndex}">
+                        <input type="radio" name="question-${index}" id="option-${index}-${optIndex}" 
+                               ${isSelected ? 'checked' : ''}>
+                        <label for="option-${index}-${optIndex}">${option.text}</label>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div class="navigation-buttons">
+                        ${index > 0 ? '<button class="btn btn-outline" id="prevQuestion">Previous</button>' : '<div></div>'}
+                        ${index < questions.length - 1 ? '<button class="btn btn-primary" id="nextQuestion">Next</button>' : ''}
+                        ${index === questions.length - 1 ? '<button class="btn btn-accent" id="submitEvaluation">Submit Evaluation</button>' : ''}
+                    </div>
+                </div>
+            `;
+
+            // Replace question container content
+            questionContainer.innerHTML = html;
+
+            // Add event listeners
+            document.querySelectorAll(`#options-${index} .option`).forEach(option => {
+                option.addEventListener('click', function() {
+                    selectOption(index, parseInt(this.getAttribute('data-index')));
+                });
+            });
+
+            if (document.getElementById('prevQuestion')) {
+                document.getElementById('prevQuestion').addEventListener('click', goToPreviousQuestion);
+            }
+
+            if (document.getElementById('nextQuestion')) {
+                document.getElementById('nextQuestion').addEventListener('click', goToNextQuestion);
+            }
+
+            if (document.getElementById('submitEvaluation')) {
+                document.getElementById('submitEvaluation').addEventListener('click', submitEvaluation);
+            }
+        }
+
+        // Select an option
+        function selectOption(questionIndex, optionIndex) {
+            answers[questionIndex] = optionIndex;
+            
+            // Update UI
+            const options = document.querySelectorAll(`#options-${questionIndex} .option`);
+            options.forEach((opt, idx) => {
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    opt.querySelector('input').checked = true;
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+        }
+
+        // Navigate to previous question
+        function goToPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion(currentQuestion);
+                updateProgress();
+            }
+        }
+
+        // Navigate to next question
+        function goToNextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                // Check if current question is answered
+                if (answers[currentQuestion] === null) {
+                    alert('Please select an answer before proceeding.');
+                    return;
+                }
+                
+                currentQuestion++;
+                renderQuestion(currentQuestion);
+                updateProgress();
+                
+                // Show interim analysis after Q25 if not already shown
+                if (currentQuestion === 25 && !document.getElementById('interimAnalysis').classList.contains('shown')) {
+                    showInterimAnalysis();
+                }
+            }
+        }
+
+        // Update progress indicator
+        function updateProgress() {
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('questionProgress').style.width = `${progressPercent}%`;
+        }
+
+        // Show interim analysis after Q25
+        function showInterimAnalysis() {
+            // Calculate scores
+            calculateScores();
+            
+            // Calculate interim score (only sections A and B)
+            const maxInterimScore = maxSectionAScore + maxSectionBScore;
+            const interimScore = sectionAScore + sectionBScore;
+            const interimPercent = ((interimScore + maxInterimScore) / (maxInterimScore * 2)) * 100;
+            
+            // Update UI
+            document.getElementById('interimScoreBar').style.width = `${interimPercent}%`;
+            
+            // Set evaluation text
+            const evaluationText = document.getElementById('interimEvaluationText');
+            if (interimScore < -maxInterimScore * 0.5) {
+                evaluationText.textContent = "Critical Risk – Candidate shows significant deficiencies in both experience and exam performance. Strongly consider whether to continue with the trial phase.";
+            } else if (interimScore < 0) {
+                evaluationText.textContent = "Needs Improvement – Candidate has some areas of concern in either experience or exam performance. The trial phase will be important to assess practical skills.";
+            } else if (interimScore < maxInterimScore * 0.5) {
+                evaluationText.textContent = "Promising – Candidate demonstrates adequate experience and exam performance. Proceed to trial with standard oversight.";
+            } else {
+                evaluationText.textContent = "Strong Candidate – Candidate shows excellent experience and exam performance. Likely to perform well in the trial phase.";
+            }
+            
+            // Show interim analysis
+            document.getElementById('interimAnalysis').classList.add('active', 'shown');
+            
+            // Add event listeners
+            document.getElementById('continueToTrial').addEventListener('click', () => {
+                document.getElementById('interimAnalysis').classList.remove('active');
+                currentQuestion++;
+                renderQuestion(currentQuestion);
+                updateProgress();
+            });
+            
+            document.getElementById('reviewAnswers').addEventListener('click', () => {
+                document.getElementById('interimAnalysis').classList.remove('active');
+                currentQuestion = 0;
+                renderQuestion(currentQuestion);
+                updateProgress();
+            });
+        }
+
+        // Calculate all scores
+        function calculateScores() {
+            sectionAScore = 0;
+            sectionBScore = 0;
+            sectionCScore = 0;
+            
+            questions.forEach((question, index) => {
+                if (answers[index] !== null) {
+                    const optionValue = question.options[answers[index]].value;
+                    const weightedValue = optionValue * question.weight;
+                    
+                    if (question.section === "A") {
+                        sectionAScore += weightedValue;
+                    } else if (question.section === "B") {
+                        sectionBScore += weightedValue;
+                    } else if (question.section === "C") {
+                        sectionCScore += weightedValue;
+                    }
+                }
+            });
+            
+            // Apply diminishing returns as score approaches maximum
+            sectionAScore = applyDiminishingReturns(sectionAScore, maxSectionAScore);
+            sectionBScore = applyDiminishingReturns(sectionBScore, maxSectionBScore);
+            sectionCScore = applyDiminishingReturns(sectionCScore, maxSectionCScore);
+            
+            console.log("Scores calculated:", {
+                sectionAScore,
+                sectionBScore,
+                sectionCScore,
+                maxSectionAScore,
+                maxSectionBScore,
+                maxSectionCScore
+            });
+        }
+
+        // Apply diminishing returns to score
+        function applyDiminishingReturns(score, maxScore) {
+            if (maxScore <= 0) return score;
+            
+            // Normalize score to range [-1, 1]
+            const normalized = score / maxScore;
+            
+            // Apply sigmoid-like function to create diminishing returns
+            let adjusted;
+            if (normalized >= 0) {
+                adjusted = Math.atan(normalized * 1.5) / (Math.PI / 2);
+            } else {
+                adjusted = -Math.atan(-normalized * 1.5) / (Math.PI / 2);
+            }
+            
+            // Convert back to original scale
+            return adjusted * maxScore;
+        }
+
+        // Submit evaluation
+        function submitEvaluation() {
+            // Check if all questions are answered
+            if (answers.includes(null)) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            
+            // Calculate final scores
+            calculateScores();
+            
+            // Calculate final score (weighted average)
+            const totalScore = sectionAScore + sectionBScore + sectionCScore;
+            const maxTotalScore = maxSectionAScore + maxSectionBScore + maxSectionCScore;
+            const scorePercent = ((totalScore + maxTotalScore) / (maxTotalScore * 2)) * 100;
+            
+            // Update UI
+            document.getElementById('finalScore').textContent = Math.round(totalScore);
+            document.getElementById('finalScoreBar').style.width = `${scorePercent}%`;
+            document.getElementById('sectionAScore').textContent = Math.round(sectionAScore);
+            document.getElementById('sectionBScore').textContent = Math.round(sectionBScore);
+            document.getElementById('sectionCScore').textContent = Math.round(sectionCScore);
+            
+            // Get the root CSS element
+            const rootStyles = getComputedStyle(document.documentElement);
+
+            // Set evaluation message
+            const evaluationMessage = document.getElementById('evaluationMessage');
+            if (totalScore < -maxTotalScore * 0.5) {
+                evaluationMessage.textContent = "Critical Risk – Not suitable for server ownership. Candidate demonstrates significant deficiencies across all evaluation areas.";
+                evaluationMessage.style.borderLeftColor = rootStyles.getPropertyValue('--error');
+            } else if (totalScore < 0) {
+                evaluationMessage.textContent = "Needs improvement – Candidate shows potential but has notable weaknesses that need addressing before considering server ownership.";
+                evaluationMessage.style.borderLeftColor = rootStyles.getPropertyValue('--warning');
+            } else if (totalScore < maxTotalScore * 0.5) {
+                evaluationMessage.textContent = "Promising – requires oversight. Candidate demonstrates adequate skills but would benefit from mentorship and gradual responsibility increase.";
+                evaluationMessage.style.borderLeftColor = "#4CAF50"; // You can keep this as hex
+            } else {
+                evaluationMessage.textContent = "Strong candidate – suitable for ownership. Candidate excels across all evaluation areas and is ready for server ownership responsibilities.";
+                evaluationMessage.style.borderLeftColor = rootStyles.getPropertyValue('--success');
+        }
+
+            
+            // Show results
+            document.getElementById('questionContainer').style.display = 'none';
+            document.getElementById('resultsContainer').classList.add('active');
+            
+            // Add event listener for reset button
+            document.getElementById('resetEvaluation').addEventListener('click', resetEvaluation);
+        }
+
+        // Reset evaluation
+        function resetEvaluation() {
+            currentQuestion = 0;
+            answers = Array(questions.length).fill(null);
+            sectionAScore = 0;
+            sectionBScore = 0;
+            sectionCScore = 0;
+            
+            document.getElementById('resultsContainer').classList.remove('active');
+            document.getElementById('questionContainer').style.display = 'block';
+            document.getElementById('interimAnalysis').classList.remove('active', 'shown');
+            
+            renderQuestion(currentQuestion);
+            updateProgress();
+        }
+
+        // Initialize the evaluation when the page loads
+        document.addEventListener('DOMContentLoaded', initEvaluation);
+    </script>
+</body>
+</html>
