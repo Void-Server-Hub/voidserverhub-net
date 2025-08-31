@@ -1248,7 +1248,6 @@
             });
         }
 
-        // Calculate all scores
         function calculateScores() {
             sectionAScore = 0;
             sectionBScore = 0;
@@ -1269,21 +1268,19 @@
                 }
             });
             
-            // Apply diminishing returns as score approaches maximum
+            // Apply diminishing returns
             sectionAScore = applyDiminishingReturns(sectionAScore, maxSectionAScore);
             sectionBScore = applyDiminishingReturns(sectionBScore, maxSectionBScore);
             sectionCScore = applyDiminishingReturns(sectionCScore, maxSectionCScore);
             
-            console.log("Scores calculated:", {
-                sectionAScore,
-                sectionBScore,
-                sectionCScore,
-                maxSectionAScore,
-                maxSectionBScore,
-                maxSectionCScore
-            });
+            // Calculate normalized score between -100 and 100
+            const maxPossible = maxSectionAScore + maxSectionBScore + maxSectionCScore;
+            const minPossible = -maxPossible; // Since negative options exist
+            const normalizedScore = ((sectionAScore + sectionBScore + sectionCScore - minPossible) / (maxPossible - minPossible)) * 200 - 100;
+            
+            return Math.round(normalizedScore);
         }
-
+        
         // Apply diminishing returns to score
         function applyDiminishingReturns(score, maxScore) {
             if (maxScore <= 0) return score;
