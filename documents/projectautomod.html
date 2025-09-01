@@ -718,6 +718,153 @@
                 font-size: 1.2rem;
             }
         }
+        /* Privacy Policy & ToS Section */
+        .legal-section {
+            background: var(--primary-dark);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .legal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .legal-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(106, 13, 173, 0.3);
+        }
+
+        .legal-tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .legal-tab.active {
+            color: var(--accent-light);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .legal-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-light);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .legal-content {
+            background: rgba(26, 26, 46, 0.5);
+            border-radius: 10px;
+            padding: 40px;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            backdrop-filter: blur(5px);
+            max-height: 500px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--primary-light);
+        }
+
+        .legal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .legal-content::-webkit-scrollbar-track {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+
+        .legal-content::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .policy-content {
+            display: none;
+        }
+
+        .policy-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .policy-content h2 {
+            color: var(--neon-white);
+            text-shadow: 0 0 10px var(--neon-glow);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .policy-content h3 {
+            color: var(--accent-light);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .policy-content p, .policy-content ul {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .policy-content ul {
+            padding-left: 20px;
+        }
+
+        .policy-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .last-updated {
+            font-style: italic;
+            color: var(--accent-light);
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px var(--accent-glow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .legal-tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .legal-tab {
+                border-bottom: 1px solid rgba(106, 13, 173, 0.3);
+                text-align: center;
+            }
+            
+            .legal-content {
+                padding: 20px;
+                max-height: 400px;
+            }
+            
+            .policy-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .policy-content h3 {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -821,6 +968,171 @@
                     </div>
                     <h3 class="feature-title">User Scanning</h3>
                     <p class="feature-desc">Scan specific users to view all their violations, context, and patterns of behavior.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Privacy Policy & ToS Section -->
+    <section class="legal-section" id="legal">
+        <div class="container legal-container">
+            <h2 class="section-title">Legal Documents</h2>
+            <p class="section-subtitle">Review our Terms of Service and Privacy Policy</p>
+            
+            <div class="legal-tabs">
+                <div class="legal-tab active" data-tab="tos">Terms of Service</div>
+                <div class="legal-tab" data-tab="privacy">Privacy Policy</div>
+            </div>
+            
+            <div class="legal-content">
+                <!-- Terms of Service Content -->
+                <div class="policy-content active" id="tos-content">
+                    <h2>Project Automod – Terms of Service (ToS)</h2>
+                    <p class="last-updated">Last Updated: [Insert Date]</p>
+                    
+                    <p>Welcome to <strong>Project Automod</strong>, a Discord bot owned and managed by the <strong>Void Server Hub</strong> brand. By using Project Automod, you agree to these Terms of Service (ToS).</p>
+                    
+                    <h3>1. Eligibility & Compliance</h3>
+                    <ul>
+                        <li>You must be at least 13 years old to use Project Automod, in compliance with <a href="https://discord.com/terms" target="_blank">Discord's Terms of Service</a>.</li>
+                        <li>By using this bot, you agree to follow all applicable laws and Discord's policies.</li>
+                        <li>These Terms do not override national law or Discord's ToS.</li>
+                    </ul>
+                    
+                    <h3>2. Service Purpose</h3>
+                    <ul>
+                        <li>Project Automod is provided as a <strong>security and moderation tool</strong>.</li>
+                        <li>The bot logs public information available to it within servers where it is invited, including user IDs, usernames, display names, guild IDs, guild names, messages, and timestamps.</li>
+                        <li>Data may be used for offense tracking, moderation history, and safety lookups through the <strong>Lense Ability</strong>.</li>
+                    </ul>
+                    
+                    <h3>2a. Personal Information</h3>
+                    <ul>
+                        <li>Project Automod <strong>does not collect emails, passwords, Discord tokens, or other personal information</strong>.</li>
+                        <li>Users must <strong>not provide any personal information</strong> to the bot or through its service.</li>
+                        <li>The bot will never request sensitive information; providing such data is <strong>at your own risk</strong>.</li>
+                    </ul>
+                    
+                    <h3>3. Data Storage & Availability</h3>
+                    <ul>
+                        <li>All logged data is stored in private databases managed by the bot owner.</li>
+                        <li>The bot retains data <strong>indefinitely</strong>.</li>
+                        <li>Project Automod uses two databases:
+                            <ul>
+                                <li><strong>Main Database</strong> – handles user-facing data, where eligible deletion requests may be honored.</li>
+                                <li><strong>Immutable Security Database</strong> – permanent, unalterable copy of all logs for security and integrity, not subject to deletion requests.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>4. User Access & Rights</h3>
+                    <ul>
+                        <li>Any user may be looked up using the <strong>Lense Ability</strong>, which provides equal access for transparency.</li>
+                        <li>Users may request deletion of their data from the <strong>main database</strong> if:
+                            <ul>
+                                <li>They are deemed low risk; or</li>
+                                <li>They are wiping their online presence entirely.</li>
+                            </ul>
+                        </li>
+                        <li>Server owners may request a wipe of their server-specific data by contacting support (see Section 8).</li>
+                    </ul>
+                    
+                    <h3>5. Limitations & Liability</h3>
+                    <ul>
+                        <li>While Project Automod aims to improve server safety, <strong>no guarantee of complete protection is made</strong>.</li>
+                        <li>The bot is not responsible for missed violations, misuse of the service, or consequences of decisions made using its data.</li>
+                        <li>If the bot directly causes harm to a user or server, you must contact support immediately so the issue can be addressed.</li>
+                    </ul>
+                    
+                    <h3>6. Service Availability</h3>
+                    <ul>
+                        <li>Project Automod is offered <strong>free of charge</strong>.</li>
+                        <li>Features, uptime, and functionality may change without notice.</li>
+                        <li>We reserve the right to suspend or terminate service for abuse or misuse.</li>
+                    </ul>
+                    
+                    <h3>7. Ownership</h3>
+                    <ul>
+                        <li>Project Automod is property of the <strong>Void Server Hub</strong> brand.</li>
+                        <li>Primary management is handled by <strong>Voidic</strong>.</li>
+                    </ul>
+                    
+                    <h3>8. Support & Contact</h3>
+                    <ul>
+                        <li>For support, data requests, or questions, please visit the official support server linked on Project Automod's main page.</li>
+                    </ul>
+                </div>
+                
+                <!-- Privacy Policy Content -->
+                <div class="policy-content" id="privacy-content">
+                    <h2>Project Automod – Privacy Policy</h2>
+                    <p class="last-updated">Last Updated: [Insert Date]</p>
+                    
+                    <p>This Privacy Policy explains how Project Automod collects, stores, and uses information.</p>
+                    
+                    <h3>1. Information We Collect</h3>
+                    <p>Project Automod may collect and log:</p>
+                    <ul>
+                        <li>User IDs, usernames, and display names</li>
+                        <li>Guild IDs and guild names</li>
+                        <li>Public messages and their timestamps</li>
+                        <li>Offense records and moderation actions</li>
+                    </ul>
+                    <p>All data collected is limited to information <strong>publicly available to the bot through Discord APIs</strong>.</p>
+                    
+                    <h3>1a. Personal Information Disclaimer</h3>
+                    <ul>
+                        <li>Project Automod <strong>does not log emails, passwords, tokens, or other personal identifying information</strong>.</li>
+                        <li>Users are strongly advised <strong>not to share personal information</strong> with the bot under any circumstances.</li>
+                        <li>The bot only processes information that is publicly available on Discord or shared directly through its moderation features.</li>
+                    </ul>
+                    
+                    <h3>2. How We Use Data</h3>
+                    <ul>
+                        <li>To provide moderation, logging, and offense tracking features.</li>
+                        <li>To ensure server security and transparency.</li>
+                        <li>To provide lookup functionality via the <strong>Lense Ability</strong>, allowing anyone to see offense/moderation history.</li>
+                        <li>For limited analytics, which may be shared with trusted third parties to ensure service integrity.</li>
+                    </ul>
+                    
+                    <h3>3. Data Storage & Retention</h3>
+                    <ul>
+                        <li>Project Automod uses <strong>two separate databases</strong>:
+                            <ol>
+                                <li><strong>Main Database:</strong> Handles user-facing data, moderation logs, and offense records. Eligible users may request deletion from this database.</li>
+                                <li><strong>Immutable Security Database:</strong> Stores a permanent, unalterable copy of all logs and actions. This database exists <strong>solely for security, auditing, and integrity purposes</strong>, including detecting breaches, preventing unauthorized alterations, restoring data in case of bot errors or malfunctions, and ensuring accurate records are maintained at all times.</li>
+                            </ol>
+                        </li>
+                        <li>Data in the main database may be retained indefinitely, with deletion requests considered case-by-case.</li>
+                        <li>The immutable security database is retained indefinitely and is <strong>not subject to deletion requests</strong>.</li>
+                    </ul>
+                    
+                    <h3>4. Data Sharing</h3>
+                    <ul>
+                        <li>Offense and moderation records are accessible through the Lense Ability.</li>
+                        <li>Aggregated or anonymized analytics may be shared with third parties.</li>
+                        <li>No personal data is sold or shared for advertising.</li>
+                    </ul>
+                    
+                    <h3>5. User Rights</h3>
+                    <ul>
+                        <li>Users may request deletion of their records from the <strong>main database</strong> if deemed low risk or if they are removing their online presence.</li>
+                        <li>Server owners may request deletion of their server's records.</li>
+                        <li>Deletion requests can be made through the support server listed on the bot's main page.</li>
+                        <li>Immutable security database records cannot be deleted.</li>
+                    </ul>
+                    
+                    <h3>6. Security</h3>
+                    <ul>
+                        <li>Data is safeguarded to the best of our ability, but no system is completely secure.</li>
+                        <li>We are not liable for unauthorized access, misuse, or breaches outside our reasonable control.</li>
+                    </ul>
+                    
+                    <h3>7. Changes to Policy</h3>
+                    <p>We may update this Privacy Policy at any time. Updates will be reflected on this page with a revised "Last Updated" date.</p>
+                    
+                    <h3>8. Contact</h3>
+                    <p>For questions, concerns, or data requests, please contact us through the support server linked on Project Automod's main page.</p>
                 </div>
             </div>
         </div>
@@ -1053,6 +1365,29 @@
                 observer.observe(element);
             });
         }
+
+        // Legal tabs functionality
+        const legalTabs = document.querySelectorAll('.legal-tab');
+        const policyContents = document.querySelectorAll('.policy-content');
+
+        legalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                legalTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                policyContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-content`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
     </script>
 </body>
 </html>
