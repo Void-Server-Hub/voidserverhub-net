@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Realm Hoster Protection - Void Server Hub</title>
+    <meta name="title" content="Realm Hoster Protection - Void Server Hub">
+    <meta name="description" content="Regulation 10: Protecting Realm Hosters in the Void Server Hub Network">
+
+    <!-- Open Graph / Discord Embed -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voidserverhub.net/regulation-10.html">
+    <meta property="og:title" content="Realm Hoster Protection - Void Server Hub">
+    <meta property="og:description" content="Regulation 10: Protecting Realm Hosters in the Void Server Hub Network">
+    <meta property="og:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://voidserverhub.net/regulation-10.html">
+    <meta name="twitter:title" content="Realm Hoster Protection - Void Server Hub">
+    <meta name="twitter:description" content="Regulation 10: Protecting Realm Hosters in the Void Server Hub Network">
+    <meta name="twitter:image" content="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://voidserverhub.net/images/vsh_purple.webp">
+
+    <style>
+        :root {
+            --primary: #6a0dad;
+            --primary-dark: #4b0082;
+            --primary-light: #9c4dff;
+            --accent: #ffd700;
+            --accent-dark: #daa520;
+            --text: #f8f8f8;
+            --text-secondary: #d0d0d0;
+            --bg-dark: #1a1a2e;
+            --bg-darker: #0f0f1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(106, 13, 173, 0.6);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-darker);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preloader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.9)), 
+                        url('https://voidserverhub.net/images/golden_background.webp') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-darker);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Policy Content */
+        .policy-content {
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .policy-content:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(106,13,173,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .policy-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .policy-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .policy-intro p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .regulation-section {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .regulation-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .regulation-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .regulation-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .regulation-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+        }
+
+        .regulation-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .regulation-content {
+            color: var(--text-secondary);
+        }
+
+        .regulation-content p {
+            margin-bottom: 15px;
+        }
+
+        .regulation-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .regulation-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .regulation-content li:before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .regulation-content strong {
+            color: var(--text);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 L0,0 Z"></path></svg>') no-repeat;
+            background-size: 100% 100%;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-social h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--bg-darker);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .regulation-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .regulation-number {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .regulation-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo" class="preloader-logo">
+        <div class="preloader-bar">
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="https://voidserverhub.net/images/vsh_purple.webp" alt="Void Server Hub Logo">
+                Void&nbsp;<span>Server</span>&nbsp;Hub
+            </a>
+            
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#servers">Servers</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#allies">Allies</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">Regulation 10</div>
+                <h1 class="hero-title">Protecting <span>Realm Hosters</span></h1>
+                <p class="hero-subtitle">Ensuring fairness, accountability, and network integrity for all designated Realm Hosters operating under the VSH brand.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Content -->
+    <section class="section policy-content">
+        <div class="container policy-container">
+            <div class="policy-intro animate">
+                <p>All Realms and Discord servers under the <strong>Void Server Hub (VSH)</strong> Network remain the property of VSH. To ensure fairness, accountability, and network integrity, the following regulations apply to all designated <strong>Realm Hosters</strong> operating under the VSH brand.</p>
+            </div>
+            
+            <div class="regulation-section animate">
+                <div class="regulation-header">
+                    <div class="regulation-number">1</div>
+                    <h3 class="regulation-title">Definition and Ownership</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>A <strong>Realm Hoster</strong> is the individual designated by VSH to operate and manage a server on behalf of the network.</li>
+                        <li>While VSH retains full ownership of all servers, the Hoster maintains protected authority over daily operations and community management.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-1">
+                <div class="regulation-header">
+                    <div class="regulation-number">2</div>
+                    <h3 class="regulation-title">Authority & Accountability</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>Regardless of permissions or symbolic ownership roles, no member may override, remove, or restrict the Hoster's operational authority within their assigned server.</li>
+                        <li>Hosters must comply with all <strong>Realm Hoster status requirements</strong> and network policies. Non-compliance may affect eligibility, benefits, or affiliation status.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-1">
+                <div class="regulation-header">
+                    <div class="regulation-number">3</div>
+                    <h3 class="regulation-title">Conditions for Removal</h3>
+                </div>
+                <div class="regulation-content">
+                    <p>A Realm Hoster may only be removed or replaced under the following conditions:</p>
+                    <ul>
+                        <li><strong>Voluntary Departure</strong> – The Hoster explicitly agrees to step down.</li>
+                        <li><strong>Proven Damage</strong> – The Hoster deliberately and knowingly causes significant harm to their server (e.g., nuking, sabotage, data wipes, or exposure of vulnerabilities), supported by verified evidence reviewed by VSH Management.</li>
+                        <li><strong>Violation Clause</strong> – The Hoster is found in violation of a <strong>Level 4 or Level 5 offense</strong> under the Violation Classification System.</li>
+                        <li><strong>Inactivity Clause</strong> – If a Hoster is inactive for <strong>1 consecutive month</strong> without notice, a temporary caretaker may be assigned. After <strong>3 consecutive months</strong> of total inactivity, VSH reserves the right to reassign the Hoster role permanently, while still recognizing prior contributions.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-2">
+                <div class="regulation-header">
+                    <div class="regulation-number">4</div>
+                    <h3 class="regulation-title">Fair Treatment Clause</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>All parties—including Realm Hosters—will be treated with fairness, respect, and neutrality during any investigation, reassessment, or disciplinary process.</li>
+                        <li>However, due to the dynamics of controlling a server, <strong>VSH retains final authority</strong> to act in the network's best interest when removal, reassessment, or caretaker actions are necessary.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-2">
+                <div class="regulation-header">
+                    <div class="regulation-number">5</div>
+                    <h3 class="regulation-title">Transparency & Notification Rights</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>Realm Hosters have the right to be informed of any accusations made against them, including the identity of the accuser unless confidentiality is required for safety.</li>
+                        <li>The accuser will be informed that the Hoster will be notified of their claim.</li>
+                        <li>Both parties may present their statements or evidence to VSH Management for review.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-3">
+                <div class="regulation-header">
+                    <div class="regulation-number">6</div>
+                    <h3 class="regulation-title">Evidence Handling Protocol</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>All evidence must be collected legitimately, transparently, and submitted privately to VSH Management.</li>
+                        <li>Evidence and communications will be logged internally to maintain accountability, prevent tampering, and ensure procedural fairness.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-3">
+                <div class="regulation-header">
+                    <div class="regulation-number">7</div>
+                    <h3 class="regulation-title">Misconduct & False Report Safeguards</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>All reports are treated equally and reviewed objectively.</li>
+                        <li>If an accuser or involved party is found to have made a <strong>false, retaliatory, or malicious report</strong> intended to damage VSH, a Realm Hoster, or any other individual, VSH may impose disciplinary action on the accuser or anyone complicit.</li>
+                        <li>Weaponizing the reporting system is considered a serious offense under network policy.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate">
+                <div class="regulation-header">
+                    <div class="regulation-number">8</div>
+                    <h3 class="regulation-title">Data & Asset Continuity</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>All server data, assets, permissions, and access credentials remain under VSH ownership at all times.</li>
+                        <li>Hosters may not delete, withhold, or transfer assets without authorization from VSH Management.</li>
+                        <li>Upon reassignment, all administrative control must be returned to VSH or the designated successor immediately.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-1">
+                <div class="regulation-header">
+                    <div class="regulation-number">9</div>
+                    <h3 class="regulation-title">Quarterly Re-Assessment</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>Each Realm Hoster will undergo a <strong>quarterly review</strong> conducted by VSH Management to evaluate compliance, performance, and overall server stability.</li>
+                        <li>These reviews determine eligibility for continued operation, benefit tiers, or reassignment.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-1">
+                <div class="regulation-header">
+                    <div class="regulation-number">10</div>
+                    <h3 class="regulation-title">Appeal System</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>A Realm Hoster may appeal disciplinary or reassignment actions within <strong>7 days</strong> of receiving notice.</li>
+                        <li>Appeals must include counter-evidence or a written explanation.</li>
+                        <li>During the appeal process, caretaker management remains in place, but Hoster authority is not permanently revoked until a final decision is made.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-2">
+                <div class="regulation-header">
+                    <div class="regulation-number">11</div>
+                    <h3 class="regulation-title">Proxy / Backup Hoster Designation</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>A Realm Hoster may designate a <strong>trusted backup operator</strong>, approved by VSH, to maintain server operations during absences or emergencies.</li>
+                        <li>The backup's authority is temporary and expires upon the Hoster's return unless otherwise stated by VSH.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-2">
+                <div class="regulation-header">
+                    <div class="regulation-number">12</div>
+                    <h3 class="regulation-title">Conflict of Interest Clause</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>Realm Hosters may not operate, assist, or affiliate with competing Realm or Discord networks that conflict with VSH interests without prior written approval.</li>
+                        <li>Any discovered conflict of interest may result in reassessment or removal from the Hoster position.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="regulation-section animate delay-3">
+                <div class="regulation-header">
+                    <div class="regulation-number">13</div>
+                    <h3 class="regulation-title">Enforcement & Oversight</h3>
+                </div>
+                <div class="regulation-content">
+                    <ul>
+                        <li>VSH reserves the right to intervene, reassign, or act in any situation where network stability, integrity, or reputation is at risk.</li>
+                        <li>All actions taken under this regulation will be documented and conducted through proper VSH channels.</li>
+                        <li>Replacements, reassignments, or disciplinary actions under this regulation are final unless overturned through the appeal process.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title animate">Questions About Realm Hosting?</h2>
+                <p class="cta-subtitle animate delay-1">Contact our management team for clarification on any aspect of Regulation 10 or to discuss your role as a Realm Hoster.</p>
+                <div class="hero-buttons animate delay-2">
+                    <a href="https://discord.gg/vsh" class="btn btn-accent">Join Discord</a>
+                    <a href="mailto:voidserverhub@gmail.com" class="btn btn-outline">Contact Management</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://voidserverhub.net/images/vsh_purple.webp" loading="lazy" alt="Void Server Hub Logo">
+                        Void&nbsp;<span>Server</span>&nbsp;Hub
+                    </div>
+                    <p>A Network of Minecraft dedicated servers! Started June 11, 2021</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/vsh"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.pinterest.com/VoidServerHub/"><i class="fab fa-pinterest"></i></a>
+                        <a href="https://www.youtube.com/@VoidServerHub"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/VoidServerHub"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#servers">Servers</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#allies">Allies</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="mailto:voidserverhub@gmail.com">Contact</a></li>
+                        <li><a href="resources.html">Resource Page</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal.html">Terms of Service</a></li>
+                        <li><a href="legal.html">Privacy Policy</a></li>
+                        <li><a href="legal.html">DMCA Statement</a></li>
+                        <li><a href="legal.html">Credits & Usage Notes</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Void Server Hub. All rights reserved. Made by XxVoidicxX</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            const progress = document.querySelector('.preloader-progress');
+            
+            // Simulate loading progress
+            let width = 0;
+            const interval = setInterval(function() {
+                width += 5;
+                progress.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        preloader.classList.add('fade-out');
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Scroll animations
+        const animateElements = document.querySelectorAll('.animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
